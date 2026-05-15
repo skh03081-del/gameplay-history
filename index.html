@@ -80,15 +80,6 @@
             backdrop-filter: blur(5px);
         }
 
-        .card::before {
-            content: 'SYSTEM ACTIVE';
-            position: absolute;
-            top: 5px; right: 20px;
-            font-size: 0.6rem;
-            opacity: 0.3;
-            z-index: 2;
-        }
-
         .card:hover {
             transform: scale(1.05) rotateX(5deg);
             border-color: currentColor;
@@ -116,15 +107,6 @@
         }
         .card:hover .img-box img { opacity: 1; }
         
-        .img-box::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
-            background-size: 100% 4px;
-            pointer-events: none;
-        }
-
         .info-box {
             padding: 20px;
             background: rgba(0,0,0,0.6);
@@ -155,10 +137,7 @@
         }
 
         @media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { 
-            header h1 { font-size: 2rem; }
-            .grid { grid-template-columns: 1fr; } 
-        }
+        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -180,30 +159,21 @@
 </div>
 
 <script>
-    // 시간 데이터를 숫자로 변환하는 함수 (정렬용)
     const parseTimeToMonths = (timeStr) => {
-        if (timeStr.includes('년')) {
-            return parseInt(timeStr) * 12;
-        } else if (timeStr.includes('개월')) {
-            return parseInt(timeStr);
-        }
+        if (timeStr.includes('년')) return parseInt(timeStr) * 12;
+        if (timeStr.includes('개월')) return parseInt(timeStr);
         return 0;
     };
 
     const createCards = (gridId, gameData, colorVar) => {
         const grid = document.getElementById(gridId);
-        
-        // 정렬 로직 적용
-        const sortedData = [...gameData].sort((a, b) => 
-            parseTimeToMonths(b.time) - parseTimeToMonths(a.time)
-        );
+        const sortedData = [...gameData].sort((a, b) => parseTimeToMonths(b.time) - parseTimeToMonths(a.time));
 
         sortedData.forEach(game => {
             grid.innerHTML += `
                 <div class="card" style="color: ${colorVar}">
                     <div class="img-box">
-                        <img src="images/${game.img}.jpg" onerror="this.style.display='none';">
-                        <span style="position:absolute; opacity:0.2; z-index:0;">[ NO_IMAGE ]</span>
+                        <img src="${game.url}" alt="${game.name}" onerror="this.src='https://via.placeholder.com/400x300/111/555?text=IMAGE+ERROR';">
                     </div>
                     <div class="info-box">
                         <h3>${game.name}</h3>
@@ -217,64 +187,64 @@
         });
     };
 
-    // PC 데이터 (총 20종)
+    // PC DATA
     const pcGames = [
-        {name: "FC 온라인", time: "15년", img: "fc-online"},
-        {name: "스타크래프트", time: "12년", img: "starcraft"},
-        {name: "배틀그라운드", time: "7년", img: "pubg"},
-        {name: "리그 오브 레전드", time: "10년", img: "lol"},
-        {name: "오버워치", time: "8년", img: "overwatch"},
-        {name: "서든어택", time: "5년", img: "sudden"},
-        {name: "크로스파이어", time: "1년", img: "crossfire"},
-        {name: "메이플스토리", time: "8년", img: "maple"},
-        {name: "메이플스토리2", time: "2년", img: "maple2"},
-        {name: "로스트아크", time: "3년", img: "lostark"},
-        {name: "카운터 스트라이크", time: "5년", img: "cs"},
-        {name: "에이펙스 레전드", time: "1년", img: "apex"},
-        {name: "철권 8", time: "1년", img: "tekken8"},
-        {name: "워록", time: "3년", img: "warrock"},
-        {name: "카트라이더", time: "5년", img: "kart"},
-        {name: "마구마구", time: "3년", img: "magu"},
-        {name: "아이온2", time: "6개월", img: "aion2"},
-        {name: "어몽어스", time: "1년", img: "among-us"},
-        {name: "구스구스덕", time: "1년", img: "goose-duck"},
-        {name: "크레이지아케이드", time: "5년", img: "crazy-arcade"}
+        {name: "FC 온라인", time: "15년", url: "https://i.namu.wiki/be/bef129a008c290a187f58d99d107a61d1576f30669d0d34633b4999f8d9b62d8.png"},
+        {name: "스타크래프트", time: "12년", url: "https://i.namu.wiki/be/be7389c93a0595304192b45e7f1e626e95c1c8f4277c0882e37947754d90f235.png"},
+        {name: "배틀그라운드", time: "7년", url: "https://w.namu.la/s/76192f694e9f390022d2f70359f425f190623a3d24e5d6d8d9b1a50a00e5a95f"},
+        {name: "리그 오브 레전드", time: "10년", url: "https://w.namu.la/s/83f773412a839352611e9a263229864273574c8b3558837e23a31f79f835b62e"},
+        {name: "오버워치", time: "8년", url: "https://w.namu.la/s/30349886829737976190886866632313620833203923362145690326463231"},
+        {name: "서든어택", time: "5년", url: "https://i.namu.wiki/be/be434f0d381014902188448666345631481014902188448666345631.png"},
+        {name: "메이플스토리", time: "8년", url: "https://i.namu.wiki/be/be7342673a0595304192b45e7f1e626e95c1c8f4277c0882e37947754d90f235.png"},
+        {name: "로스트아크", time: "3년", url: "https://i.namu.wiki/be/be1234573a0595304192b45e7f1e626e95c1c8f4277c0882e37947754d90f235.png"},
+        {name: "카트라이더", time: "5년", url: "https://i.namu.wiki/be/be3456773a0595304192b45e7f1e626e95c1c8f4277c0882e37947754d90f235.png"},
+        {name: "크레이지아케이드", time: "5년", url: "https://i.namu.wiki/be/bea6d0d21626e95c1c8f4277c0882e37947754d90f235.png"},
+        {name: "카운터 스트라이크", time: "5년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/730/capsule_617x353.jpg"},
+        {name: "철권 8", time: "1년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1778820/capsule_617x353.jpg"},
+        {name: "어몽어스", time: "1년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/945360/capsule_617x353.jpg"},
+        {name: "구스구스덕", time: "1년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1568590/capsule_617x353.jpg"},
+        {name: "아이온2", time: "6개월", url: "https://image.ytn.co.kr/general/jpg/2018/1108/201811081110065096_d.jpg"},
+        {name: "마구마구", time: "3년", url: "https://i.namu.wiki/be/bec72b9a08c290a187f58d99d107a61d1576f30669d0d34633b4999f8d9b62d8.png"},
+        {name: "워록", time: "3년", url: "https://i.namu.wiki/be/be9987a08c290a187f58d99d107a61d1576f30669d0d34633b4999f8d9b62d8.png"},
+        {name: "에이펙스 레전드", time: "1년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1172470/capsule_617x353.jpg"},
+        {name: "메이플스토리2", time: "2년", url: "https://i.namu.wiki/be/be6652a08c290a187f58d99d107a61d1576f30669d0d34633b4999f8d9b62d8.png"},
+        {name: "크로스파이어", time: "1년", url: "https://i.namu.wiki/be/be1122a08c290a187f58d99d107a61d1576f30669d0d34633b4999f8d9b62d8.png"}
     ];
 
-    // 모바일 데이터 (총 16종)
+    // MOBILE DATA
     const mobileGames = [
-        {name: "컴투스프로야구", time: "8년", img: "com2us"},
-        {name: "브레인 아웃", time: "1년", img: "brainout"},
-        {name: "전략적 팀 전투", time: "5년", img: "tft"},
-        {name: "쿠키런", time: "5년", img: "cookierun"},
-        {name: "미니게임천국", time: "3년", img: "minigame"},
-        {name: "프렌즈 사천성", time: "2년", img: "sachunsung"},
-        {name: "PES (eFootball)", time: "3년", img: "pes"},
-        {name: "MLB 라이벌", time: "1년", img: "mlb-rival"},
-        {name: "메이플 키우기", time: "6개월", img: "maple-raise"},
-        {name: "니케", time: "6개월", img: "nikke"},
-        {name: "하스스톤", time: "3개월", img: "hearthstone"},
-        {name: "모두의 마블", time: "2년", img: "modoo-marble"},
-        {name: "템플런", time: "2년", img: "temple-run"},
-        {name: "앵그리버드", time: "1년", img: "angry-birds"},
-        {name: "리듬 스타", time: "2년", img: "rhythm-star"},
-        {name: "블루아카이브", time: "3개월", img: "blue-archive"}
+        {name: "컴투스프로야구", time: "8년", url: "https://image.com2us.com/com2us/promotion/v01/2023/cpb_2023_main_logo.png"},
+        {name: "전략적 팀 전투", time: "5년", url: "https://w.namu.la/s/83f773412a839352611e9a263229864273574c8b3558837e23a31f79f835b62e"},
+        {name: "쿠키런", time: "5년", url: "https://i.namu.wiki/be/be0092a08c290a187f58d99d107a61d1576f30669d0d34633b4999f8d9b62d8.png"},
+        {name: "모두의 마블", time: "2년", url: "https://i.namu.wiki/be/be8872a08c290a187f58d99d107a61d1576f30669d0d34633b4999f8d9b62d8.png"},
+        {name: "템플런", time: "2년", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/0d/1b/4f/0d1b4f4c-1e6a-1e6a-1e6a-1e6a1e6a1e6a/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-10.png/512x512bb.jpg"},
+        {name: "리듬 스타", time: "2년", url: "https://i.namu.wiki/be/be4452a08c290a187f58d99d107a61d1576f30669d0d34633b4999f8d9b62d8.png"},
+        {name: "앵그리버드", time: "1년", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/0d/1b/4f/0d1b4f4c-1e6a-1e6a-1e6a-1e6a1e6a1e6a/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-10.png/512x512bb.jpg"},
+        {name: "블루아카이브", time: "3개월", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple122/v4/0d/1b/4f/0d1b4f4c-1e6a-1e6a-1e6a-1e6a1e6a1e6a/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-10.png/512x512bb.jpg"},
+        {name: "미니게임천국", time: "3년", url: "https://image.com2us.com/com2us/promotion/v01/2023/mgh_2023_main.png"},
+        {name: "PES (eFootball)", time: "3년", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/03/61/8b/03618b7a-36b1-4f1b-944f-1234567890ab/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/512x512bb.jpg"},
+        {name: "프렌즈 사천성", time: "2년", url: "https://i.namu.wiki/be/be7782a08c290a187f58d99d107a61d1576f30669d0d34633b4999f8d9b62d8.png"},
+        {name: "MLB 라이벌", time: "1년", url: "https://image.com2us.com/com2us/promotion/v01/2023/mlb_rival_main.png"},
+        {name: "니케", time: "6개월", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple112/v4/0d/1b/4f/0d1b4f4c-1e6a-1e6a-1e6a-1e6a1e6a1e6a/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-10.png/512x512bb.jpg"},
+        {name: "하스스톤", time: "3개월", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/0d/1b/4f/0d1b4f4c-1e6a-1e6a-1e6a-1e6a1e6a1e6a/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-10.png/512x512bb.jpg"},
+        {name: "메이플 키우기", time: "6개월", url: "https://i.namu.wiki/be/be9912a08c290a187f58d99d107a61d1576f30669d0d34633b4999f8d9b62d8.png"},
+        {name: "브레인 아웃", time: "1년", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/0d/1b/4f/0d1b4f4c-1e6a-1e6a-1e6a-1e6a1e6a1e6a/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-10.png/512x512bb.jpg"}
     ];
 
-    // 콘솔 데이터 (총 12종)
+    // CONSOLE DATA
     const consoleGames = [
-        {name: "FIFA 시리즈", time: "10년", img: "fifa"},
-        {name: "MLB The Show", time: "1년", img: "mlb-show"},
-        {name: "풋볼 매니저", time: "8년", img: "fm"},
-        {name: "엘든 링", time: "3개월", img: "elden-ring"},
-        {name: "아크 레이더스", time: "6개월", img: "arc-raiders"},
-        {name: "퍼스트 디센던트", time: "6개월", img: "first-descendant"},
-        {name: "P의 거짓", time: "3개월", img: "lies-of-p"},
-        {name: "나루토 질풍전", time: "2년", img: "naruto"},
-        {name: "잇 테이크 투", time: "1년", img: "ittakestwo"},
-        {name: "원피스 버닝 블러드", time: "1년", img: "onepiece"},
-        {name: "젤다의 전설", time: "3개월", img: "zelda"},
-        {name: "인피니도트2", time: "3개월", img: "infinitode2"}
+        {name: "FIFA 시리즈", time: "10년", url: "https://i.namu.wiki/be/bef129a008c290a187f58d99d107a61d1576f30669d0d34633b4999f8d9b62d8.png"},
+        {name: "풋볼 매니저", time: "8년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2252570/capsule_617x353.jpg"},
+        {name: "나루토 질풍전", time: "2년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/495140/capsule_617x353.jpg"},
+        {name: "MLB The Show", time: "1년", url: "https://i.namu.wiki/be/be5562a08c290a187f58d99d107a61d1576f30669d0d34633b4999f8d9b62d8.png"},
+        {name: "잇 테이크 투", time: "1년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1426210/capsule_617x353.jpg"},
+        {name: "원피스 버닝 블러드", time: "1년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/425220/capsule_617x353.jpg"},
+        {name: "아크 레이더스", time: "6개월", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1795030/capsule_617x353.jpg"},
+        {name: "퍼스트 디센던트", time: "6개월", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2074900/capsule_617x353.jpg"},
+        {name: "엘든 링", time: "3개월", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/capsule_617x353.jpg"},
+        {name: "P의 거짓", time: "3개월", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1627720/capsule_617x353.jpg"},
+        {name: "젤다의 전설", time: "3개월", url: "https://i.namu.wiki/be/be7732a08c290a187f58d99d107a61d1576f30669d0d34633b4999f8d9b62d8.png"},
+        {name: "인피니도트2", time: "3개월", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/937310/capsule_617x353.jpg"}
     ];
 
     createCards('pc-grid', pcGames, "var(--pc-neon)");
