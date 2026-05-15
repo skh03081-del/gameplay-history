@@ -8,9 +8,9 @@
     <style>
         :root {
             --bg-dark: #050505;
-            --pc-neon: #00f3ff;      /* 사이언 블루 */
-            --mobile-neon: #39ff14;  /* 네온 그린 */
-            --console-neon: #ff00ff; /* 마젠타 핑크 */
+            --pc-neon: #00f3ff;
+            --mobile-neon: #39ff14;
+            --console-neon: #ff00ff;
             --glass: rgba(255, 255, 255, 0.05);
         }
 
@@ -64,7 +64,6 @@
         .mobile-label { color: var(--mobile-neon); }
         .console-label { color: var(--console-neon); }
 
-        /* 그리드 수정: 데스크톱 기준 한 줄에 4개 */
         .grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -97,7 +96,6 @@
             z-index: 10;
         }
 
-        /* 이미지 박스: 4:3 비율 고정 */
         .img-box {
             width: 100%;
             aspect-ratio: 4 / 3;
@@ -182,9 +180,25 @@
 </div>
 
 <script>
+    // 시간 데이터를 숫자로 변환하는 함수 (정렬용)
+    const parseTimeToMonths = (timeStr) => {
+        if (timeStr.includes('년')) {
+            return parseInt(timeStr) * 12;
+        } else if (timeStr.includes('개월')) {
+            return parseInt(timeStr);
+        }
+        return 0;
+    };
+
     const createCards = (gridId, gameData, colorVar) => {
         const grid = document.getElementById(gridId);
-        gameData.forEach(game => {
+        
+        // 정렬 로직 적용
+        const sortedData = [...gameData].sort((a, b) => 
+            parseTimeToMonths(b.time) - parseTimeToMonths(a.time)
+        );
+
+        sortedData.forEach(game => {
             grid.innerHTML += `
                 <div class="card" style="color: ${colorVar}">
                     <div class="img-box">
@@ -203,7 +217,7 @@
         });
     };
 
-    // PC 데이터 (16종)
+    // PC 데이터 (총 20종)
     const pcGames = [
         {name: "FC 온라인", time: "15년", img: "fc-online"},
         {name: "스타크래프트", time: "12년", img: "starcraft"},
@@ -220,10 +234,14 @@
         {name: "철권 8", time: "1년", img: "tekken8"},
         {name: "워록", time: "3년", img: "warrock"},
         {name: "카트라이더", time: "5년", img: "kart"},
-        {name: "마구마구", time: "3년", img: "magu"}
+        {name: "마구마구", time: "3년", img: "magu"},
+        {name: "아이온2", time: "6개월", img: "aion2"},
+        {name: "어몽어스", time: "1년", img: "among-us"},
+        {name: "구스구스덕", time: "1년", img: "goose-duck"},
+        {name: "크레이지아케이드", time: "5년", img: "crazy-arcade"}
     ];
 
-    // 모바일 데이터 (11종)
+    // 모바일 데이터 (총 16종)
     const mobileGames = [
         {name: "컴투스프로야구", time: "8년", img: "com2us"},
         {name: "브레인 아웃", time: "1년", img: "brainout"},
@@ -235,10 +253,15 @@
         {name: "MLB 라이벌", time: "1년", img: "mlb-rival"},
         {name: "메이플 키우기", time: "6개월", img: "maple-raise"},
         {name: "니케", time: "6개월", img: "nikke"},
-        {name: "하스스톤", time: "3개월", img: "hearthstone"}
+        {name: "하스스톤", time: "3개월", img: "hearthstone"},
+        {name: "모두의 마블", time: "2년", img: "modoo-marble"},
+        {name: "템플런", time: "2년", img: "temple-run"},
+        {name: "앵그리버드", time: "1년", img: "angry-birds"},
+        {name: "리듬 스타", time: "2년", img: "rhythm-star"},
+        {name: "블루아카이브", time: "3개월", img: "blue-archive"}
     ];
 
-    // 콘솔 데이터 (11종)
+    // 콘솔 데이터 (총 12종)
     const consoleGames = [
         {name: "FIFA 시리즈", time: "10년", img: "fifa"},
         {name: "MLB The Show", time: "1년", img: "mlb-show"},
@@ -250,7 +273,8 @@
         {name: "나루토 질풍전", time: "2년", img: "naruto"},
         {name: "잇 테이크 투", time: "1년", img: "ittakestwo"},
         {name: "원피스 버닝 블러드", time: "1년", img: "onepiece"},
-        {name: "젤다의 전설", time: "3개월", img: "zelda"}
+        {name: "젤다의 전설", time: "3개월", img: "zelda"},
+        {name: "인피니도트2", time: "3개월", img: "infinitode2"}
     ];
 
     createCards('pc-grid', pcGames, "var(--pc-neon)");
