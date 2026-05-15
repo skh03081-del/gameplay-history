@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEE JAE YOOUNG_Game Play List</title>
+    <title>JYLEE JAE-YOUNG // GAMEPLAY ARCHIVE</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-deep: #0a0c10;
-            --card-bg: #1c2128;
+            --bg-deep: #0d1117;
+            --card-bg: #161b22;
             --text-main: #e6edf3;
             --text-sub: #8b949e;
-            --pc-accent: #58a6ff;     /* 차분한 블루 */
-            --mobile-accent: #3fb950;  /* 차분한 그린 */
-            --console-accent: #bc8cff; /* 차분한 퍼플 */
+            --pc-accent: #58a6ff;     /* PC: 블루 */
+            --mobile-accent: #3fb950;  /* 모바일: 그린 */
+            --console-accent: #bc8cff; /* 콘솔: 퍼플 */
             --border-color: #30363d;
-            --blur-val: 12px;         /* 블러 강도 */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,45 +28,41 @@
 
         .container { max-width: 1400px; margin: 0 auto; }
 
-        /* 상단 헤더 강조 디자인 */
+        /* [Header] 이름과 타이틀 강조 */
         header {
             text-align: center;
             margin-bottom: 120px;
-            padding-bottom: 50px;
+            padding-bottom: 60px;
             border-bottom: 1px solid var(--border-color);
         }
         header .name-tag {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            color: var(--text-sub);
-            letter-spacing: 6px;
-            margin-bottom: 15px;
+            font-size: 1.2rem;
+            color: var(--pc-accent);
+            letter-spacing: 8px;
+            margin-bottom: 20px;
             display: block;
+            font-weight: 700;
         }
         header h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 4.5rem;
+            font-size: 4.2rem;
             font-weight: 700;
             letter-spacing: -2px;
             color: #fff;
             margin-bottom: 20px;
-            line-height: 1;
-        }
-        header .highlight {
-            color: var(--pc-accent);
-            text-shadow: 0 0 20px rgba(88, 166, 255, 0.3);
         }
         header p {
             font-size: 1.4rem;
             color: var(--text-sub);
-            max-width: 700px;
-            margin: 0 auto;
+            font-weight: 400;
+            letter-spacing: 1px;
         }
 
         /* 섹션 레이블 */
         .section-label {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin: 120px 0 40px;
             display: flex;
             align-items: center;
@@ -88,65 +83,82 @@
         .grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 35px;
+            gap: 30px;
         }
 
         /* 카드 디자인 */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
+            border-radius: 12px;
             overflow: hidden;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
         }
 
         .card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-10px);
             border-color: currentColor;
-            box-shadow: 0 12px 24px rgba(0,0,0,0.6);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* 상하단 블러가 포함된 이미지 박스 */
+        /* [Image Box] 사진 짤림 방지 + 위아래 블러 처리 */
         .img-box {
             position: relative;
             width: 100%;
             aspect-ratio: 4 / 3;
             background: #000;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
+        /* 배경에 깔리는 블러 이미지 (공간 채우기용) */
+        .img-bg-blur {
+            position: absolute;
+            width: 110%;
+            height: 110%;
+            object-fit: cover;
+            filter: blur(15px) brightness(0.4);
+            z-index: 1;
+        }
+
+        /* 실제로 보여지는 메인 이미지 (contain으로 설정하여 짤림 방지) */
         .img-main {
+            position: relative;
+            z-index: 2;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* 이미지가 꽉 차게 */
+            object-fit: contain; 
+            padding: 5px; /* 미세한 여백으로 더 깔끔하게 */
         }
 
-        /* 동일한 간격의 상하단 블러 오버레이 */
-        .blur-overlay {
+        /* 상하단 동일한 간격의 소프트 그라데이션 */
+        .img-box::before, .img-box::after {
+            content: '';
             position: absolute;
-            left: 0;
-            right: 0;
-            height: 40px; /* 블러 영역 간격 동일하게 설정 */
-            backdrop-filter: blur(var(--blur-val));
-            -webkit-backdrop-filter: blur(var(--blur-val));
-            z-index: 2;
-            background: rgba(0, 0, 0, 0.2);
+            left: 0; right: 0; height: 30%;
+            z-index: 3;
+            pointer-events: none;
         }
-        .blur-top { top: 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .blur-bottom { bottom: 0; border-top: 1px solid rgba(255,255,255,0.05); }
+        .img-box::before { top: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent); }
+        .img-box::after { bottom: 0; background: linear-gradient(to top, rgba(0,0,0,0.5), transparent); }
 
         .info-box {
-            padding: 24px;
-            flex-grow: 1;
+            padding: 22px;
+            background: var(--card-bg);
         }
 
         .info-box h3 {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 15px;
             color: #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .stats {
@@ -157,34 +169,32 @@
 
         .time-badge {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             background: rgba(255, 255, 255, 0.08);
-            padding: 4px 12px;
-            border-radius: 6px;
+            padding: 3px 10px;
+            border-radius: 4px;
             color: var(--text-main);
         }
 
         .genre-text {
-            font-size: 1rem;
-            font-weight: 600;
-            color: currentColor; /* 섹션별 강조색 상속 */
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: currentColor; /* 섹션 강조색 상속 */
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
         @media (max-width: 1200px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { 
-            .grid { grid-template-columns: 1fr; }
-            header h1 { font-size: 2.8rem; }
-        }
+        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; header h1 { font-size: 2.5rem; } } }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <span class="name-tag">LEEJAE-YOUNG // GAMEPLAY LIST</span>
-        <h1>JYLEE <span class="highlight">GAME_LOG</span></h1>
+        <span class="name-tag">LEE JAE-YOUNG // GAME PLANNER</span>
+        <h1>JYLEE <span style="color:var(--pc-accent)">GAME_LOG</span></h1>
+        <p>48종의 게임 플레이 이력을 기반으로 한 장르별 분석 데이터베이스</p>
     </header>
 
     <div class="section-label pc-label">01. PC_PLATFORM</div>
@@ -208,9 +218,8 @@
             grid.innerHTML += `
                 <div class="card" style="color: ${color}">
                     <div class="img-box">
-                        <div class="blur-overlay blur-top"></div>
+                        <img src="${g.img}.jpg" class="img-bg-blur">
                         <img src="${g.img}.jpg" class="img-main" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300/111/333?text=IMAGE+MISSING';">
-                        <div class="blur-overlay blur-bottom"></div>
                     </div>
                     <div class="info-box">
                         <h3>${g.name}</h3>
