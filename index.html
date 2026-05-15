@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAMEPLAY ARCHIVE | USER LOG</title>
+    <title>GAMEPLAY ARCHIVE | JYLEE LOG</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -28,7 +28,6 @@
             overflow-x: hidden;
         }
 
-        /* 헤더 디자인 */
         header {
             text-align: center;
             margin-bottom: 80px;
@@ -46,11 +45,10 @@
 
         .container { max-width: 1300px; margin: 0 auto; }
 
-        /* 플랫폼 섹션 제목 */
         .section-label {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.5rem;
-            margin: 60px 0 30px;
+            margin: 80px 0 30px;
             display: flex;
             align-items: center;
             gap: 15px;
@@ -66,14 +64,13 @@
         .mobile-label { color: var(--mobile-neon); }
         .console-label { color: var(--console-neon); }
 
-        /* 게임 카드 그리드 */
+        /* 그리드 수정: 데스크톱 기준 한 줄에 4개 */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 25px;
         }
 
-        /* 카드 개별 디자인 */
         .card {
             background: var(--glass);
             border: 1px solid rgba(255,255,255,0.1);
@@ -90,25 +87,37 @@
             top: 5px; right: 20px;
             font-size: 0.6rem;
             opacity: 0.3;
+            z-index: 2;
         }
 
         .card:hover {
             transform: scale(1.05) rotateX(5deg);
             border-color: currentColor;
             box-shadow: 0 0 20px currentColor;
+            z-index: 10;
         }
 
+        /* 이미지 박스: 4:3 비율 고정 */
         .img-box {
             width: 100%;
-            height: 250px;
+            aspect-ratio: 4 / 3;
             background: #111;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            overflow: hidden;
         }
+
+        .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        .card:hover .img-box img { opacity: 1; }
         
-        /* 스캔라인 효과 */
         .img-box::after {
             content: '';
             position: absolute;
@@ -147,10 +156,10 @@
             box-shadow: 0 0 10px currentColor;
         }
 
-        /* 반응형 */
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { 
             header h1 { font-size: 2rem; }
-            .grid { grid-template-columns: repeat(2, 1fr); }
+            .grid { grid-template-columns: 1fr; } 
         }
     </style>
 </head>
@@ -173,18 +182,19 @@
 </div>
 
 <script>
-    const createCards = (gridId, games, time, colorClass) => {
+    const createCards = (gridId, gameData, colorVar) => {
         const grid = document.getElementById(gridId);
-        games.forEach(name => {
+        gameData.forEach(game => {
             grid.innerHTML += `
-                <div class="card" style="color: ${colorClass}">
+                <div class="card" style="color: ${colorVar}">
                     <div class="img-box">
-                        <span style="opacity:0.2">[ NO_IMAGE ]</span>
+                        <img src="images/${game.img}.jpg" onerror="this.style.display='none';">
+                        <span style="position:absolute; opacity:0.2; z-index:0;">[ NO_IMAGE ]</span>
                     </div>
                     <div class="info-box">
-                        <h3>${name}</h3>
+                        <h3>${game.name}</h3>
                         <div class="stats">
-                            <span class="playtime">${time}</span>
+                            <span class="playtime">${game.time} 플레이</span>
                             <div class="status-dot"></div>
                         </div>
                     </div>
@@ -193,10 +203,59 @@
         });
     };
 
-    // 데이터 삽입 (원하는 게임명으로 변경하세요)
-    createCards('pc-grid', ["FC Online", "PUBG", "Valorant", "League of Legends", "Overwatch 2", "Lost Ark"], "1,200H+", "var(--pc-neon)");
-    createCards('mobile-grid', ["Genshin", "Brawl Stars", "Nikke", "Blue Archive", "Wild Rift", "Cookie Run"], "600H+", "var(--mobile-neon)");
-    createCards('console-grid', ["Elden Ring", "Zelda: TotK", "God of War", "Spiderman 2", "Monster Hunter", "FF7 Rebirth"], "300H+", "var(--console-neon)");
+    // PC 데이터 (16종)
+    const pcGames = [
+        {name: "FC 온라인", time: "15년", img: "fc-online"},
+        {name: "스타크래프트", time: "12년", img: "starcraft"},
+        {name: "배틀그라운드", time: "7년", img: "pubg"},
+        {name: "리그 오브 레전드", time: "10년", img: "lol"},
+        {name: "오버워치", time: "8년", img: "overwatch"},
+        {name: "서든어택", time: "5년", img: "sudden"},
+        {name: "크로스파이어", time: "1년", img: "crossfire"},
+        {name: "메이플스토리", time: "8년", img: "maple"},
+        {name: "메이플스토리2", time: "2년", img: "maple2"},
+        {name: "로스트아크", time: "3년", img: "lostark"},
+        {name: "카운터 스트라이크", time: "5년", img: "cs"},
+        {name: "에이펙스 레전드", time: "1년", img: "apex"},
+        {name: "철권 8", time: "1년", img: "tekken8"},
+        {name: "워록", time: "3년", img: "warrock"},
+        {name: "카트라이더", time: "5년", img: "kart"},
+        {name: "마구마구", time: "3년", img: "magu"}
+    ];
+
+    // 모바일 데이터 (11종)
+    const mobileGames = [
+        {name: "컴투스프로야구", time: "8년", img: "com2us"},
+        {name: "브레인 아웃", time: "1년", img: "brainout"},
+        {name: "전략적 팀 전투", time: "5년", img: "tft"},
+        {name: "쿠키런", time: "5년", img: "cookierun"},
+        {name: "미니게임천국", time: "3년", img: "minigame"},
+        {name: "프렌즈 사천성", time: "2년", img: "sachunsung"},
+        {name: "PES (eFootball)", time: "3년", img: "pes"},
+        {name: "MLB 라이벌", time: "1년", img: "mlb-rival"},
+        {name: "메이플 키우기", time: "6개월", img: "maple-raise"},
+        {name: "니케", time: "6개월", img: "nikke"},
+        {name: "하스스톤", time: "3개월", img: "hearthstone"}
+    ];
+
+    // 콘솔 데이터 (11종)
+    const consoleGames = [
+        {name: "FIFA 시리즈", time: "10년", img: "fifa"},
+        {name: "MLB The Show", time: "1년", img: "mlb-show"},
+        {name: "풋볼 매니저", time: "8년", img: "fm"},
+        {name: "엘든 링", time: "3개월", img: "elden-ring"},
+        {name: "아크 레이더스", time: "6개월", img: "arc-raiders"},
+        {name: "퍼스트 디센던트", time: "6개월", img: "first-descendant"},
+        {name: "P의 거짓", time: "3개월", img: "lies-of-p"},
+        {name: "나루토 질풍전", time: "2년", img: "naruto"},
+        {name: "잇 테이크 투", time: "1년", img: "ittakestwo"},
+        {name: "원피스 버닝 블러드", time: "1년", img: "onepiece"},
+        {name: "젤다의 전설", time: "3개월", img: "zelda"}
+    ];
+
+    createCards('pc-grid', pcGames, "var(--pc-neon)");
+    createCards('mobile-grid', mobileGames, "var(--mobile-neon)");
+    createCards('console-grid', consoleGames, "var(--console-neon)");
 </script>
 
 </body>
