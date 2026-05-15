@@ -24,95 +24,97 @@
             font-family: 'Poppins', 'Noto Sans KR', sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-main);
-            padding: 80px 20px;
+            padding: 100px 20px;
             overflow-x: hidden;
         }
 
         .container { max-width: 1400px; margin: 0 auto; }
 
-        /* [Header] 요청대로 수정된 상단 디자인 */
+        /* [Header] 요청하신 텍스트 수정 및 중앙 정렬 */
         header {
             text-align: center;
-            margin-bottom: 100px;
+            margin-bottom: 120px;
         }
         header .name-tag {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            font-weight: 800;
+            font-size: 1.8rem;
+            font-weight: 700;
             color: var(--text-main);
-            letter-spacing: 10px;
+            letter-spacing: 12px;
             margin-bottom: 10px;
             display: block;
         }
         header h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 4.5rem;
+            font-size: 5.5rem;
             font-weight: 900;
             letter-spacing: -2px;
-            background: linear-gradient(180deg, #fff 40%, var(--pc-color) 100%);
+            background: linear-gradient(180deg, #fff 30%, var(--pc-color) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
         }
 
-        /* [Section Header] 가독성 강조 및 효과 */
+        /* [Section Header] 가독성 및 효과 대폭 강화 */
         .section-header {
-            margin: 120px 0 40px;
-            padding: 12px 25px;
-            border-radius: 8px;
+            margin: 140px 0 50px;
+            padding: 15px 35px;
+            border-radius: 4px;
             display: inline-block;
             font-family: 'Orbitron', sans-serif;
             position: relative;
-            min-width: 200px;
+            min-width: 320px;
+            border-left: 10px solid currentColor;
         }
         .section-header h2 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 900;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             position: relative;
             z-index: 2;
         }
-        .section-header::before {
+        /* 섹션 하단 글로우 라인 */
+        .section-header::after {
             content: '';
             position: absolute;
-            left: 0; bottom: -5px;
-            width: 100%; height: 4px;
-            border-radius: 2px;
-            box-shadow: 0 0 15px currentColor;
+            left: -10px; bottom: -5px;
+            width: calc(100% + 10px); height: 2px;
+            background: currentColor;
+            box-shadow: 0 0 20px currentColor;
         }
 
-        .pc-header { color: var(--pc-color); background: rgba(88, 166, 255, 0.1); }
-        .mobile-header { color: var(--mobile-color); background: rgba(63, 185, 80, 0.1); }
-        .console-header { color: var(--console-color); background: rgba(188, 140, 255, 0.1); }
+        .pc-header { color: var(--pc-color); background: rgba(88, 166, 255, 0.05); }
+        .mobile-header { color: var(--mobile-color); background: rgba(63, 185, 80, 0.05); }
+        .console-header { color: var(--console-color); background: rgba(188, 140, 255, 0.05); }
 
-        /* 그리드 */
+        /* 그리드 레이아웃 */
         .grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
+            gap: 35px;
         }
 
         /* 카드 디자인 */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             display: flex;
             flex-direction: column;
         }
         .card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-12px) scale(1.02);
             border-color: currentColor;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
         }
 
         /* [Image Box] 짤림 방지 + 배경 블러 자연스럽게 채우기 */
         .img-box {
             position: relative;
             width: 100%;
-            aspect-ratio: 4 / 3; /* 모든 카드 높이 통일 */
+            aspect-ratio: 4 / 3;
             background: #000;
             display: flex;
             align-items: center;
@@ -121,10 +123,10 @@
         }
         .img-blur-bg {
             position: absolute;
-            width: 120%;
-            height: 120%;
+            width: 130%;
+            height: 130%;
             object-fit: cover;
-            filter: blur(15px) brightness(0.3);
+            filter: blur(18px) brightness(0.3);
             z-index: 1;
         }
         .img-main {
@@ -132,19 +134,19 @@
             z-index: 2;
             width: 100%;
             height: 100%;
-            object-fit: contain; /* [중요] 이미지가 잘리지 않고 전체 노출됨 */
-            padding: 5px;
+            object-fit: contain; /* 로고와 글자가 절대 잘리지 않음 */
+            padding: 10px;
         }
 
-        /* 정보 영역 */
+        /* 정보 텍스트 영역 */
         .info-box {
-            padding: 22px;
-            flex-grow: 1;
+            padding: 25px;
+            background: linear-gradient(180deg, rgba(22,27,34,0) 0%, rgba(22,27,34,1) 40%);
         }
         .info-box h3 {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             color: #fff;
             white-space: nowrap;
             overflow: hidden;
@@ -157,20 +159,21 @@
             align-items: center;
         }
 
-        /* 숫자 가독성 최적화 폰트 적용 (Poppins) */
-        .time-badge {
+        /* 숫자 가독성 최적화 (Poppins 폰트) */
+        .time-label {
             font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
+            font-size: 1.15rem;
             font-weight: 800;
-            background: rgba(255, 255, 255, 0.08);
-            padding: 4px 12px;
-            border-radius: 6px;
             color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 14px;
+            border-radius: 8px;
         }
         .genre-tag {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 700;
+            letter-spacing: 1px;
             color: currentColor;
             text-transform: uppercase;
         }
@@ -178,8 +181,8 @@
         @media (max-width: 1200px) { .grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 600px) { 
             .grid { grid-template-columns: 1fr; } 
-            header h1 { font-size: 2.8rem; }
-            .section-header h2 { font-size: 1.8rem; }
+            header h1 { font-size: 3rem; }
+            .section-header h2 { font-size: 2rem; }
         }
     </style>
 </head>
@@ -224,7 +227,7 @@
                     <div class="info-box">
                         <h3>${g.name}</h3>
                         <div class="stats">
-                            <span class="time-badge">${g.time}</span>
+                            <span class="time-label">${g.time}</span>
                             <span class="genre-tag">${g.genre}</span>
                         </div>
                     </div>
@@ -232,6 +235,7 @@
         });
     };
 
+    // [PC 데이터 20종]
     const pcGames = [
         {name: "FC 온라인", time: "15년", img: "fc-online", genre: "Sports"},
         {name: "스타크래프트", time: "12년", img: "starcraft", genre: "RTS"},
@@ -255,6 +259,7 @@
         {name: "아이온2", time: "6개월", img: "aion2", genre: "MMORPG"}
     ];
 
+    // [MOBILE 데이터 16종]
     const mobileGames = [
         {name: "컴투스프로야구", time: "8년", img: "com2us", genre: "Sports"},
         {name: "전략적 팀 전투", time: "5년", img: "tft", genre: "Auto Battler"},
@@ -274,6 +279,7 @@
         {name: "블루아카이브", time: "3개월", img: "blue-archive", genre: "Subculture"}
     ];
 
+    // [CONSOLE 데이터 12종]
     const consoleGames = [
         {name: "FIFA 시리즈", time: "10년", img: "fifa", genre: "Sports"},
         {name: "풋볼 매니저", time: "8년", img: "fm", genre: "Simulation"},
