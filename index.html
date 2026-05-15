@@ -3,116 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gameplay History | Game Planner Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>GAMEPLAY ARCHIVE | USER LOG</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent-color: #38bdf8; /* 포인트 컬러: 스카이 블루 */
-            --text-main: #f8fafc;
-            --text-sub: #94a3b8;
-            --pc-color: #ef4444;    /* PC 섹션 포인트 */
-            --mobile-color: #22c55e; /* Mobile 섹션 포인트 */
-            --console-color: #a855f7; /* Console 섹션 포인트 */
+            --bg-dark: #050505;
+            --pc-neon: #00f3ff;      /* 사이언 블루 */
+            --mobile-neon: #39ff14;  /* 네온 그린 */
+            --console-neon: #ff00ff; /* 마젠타 핑크 */
+            --glass: rgba(255, 255, 255, 0.05);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding: 40px 20px;
+            font-family: 'Rajdhani', 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 50% 50%, #1a1a2e 0%, #050505 100%),
+                linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 100%, 100% 4px, 3px 100%;
+            color: #fff;
+            padding: 50px 20px;
+            overflow-x: hidden;
         }
 
+        /* 헤더 디자인 */
         header {
             text-align: center;
-            margin-bottom: 60px;
-            animation: fadeIn 1s ease-in;
+            margin-bottom: 80px;
+            text-transform: uppercase;
         }
+        header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            letter-spacing: 8px;
+            color: #fff;
+            text-shadow: 0 0 10px var(--pc-neon), 0 0 20px var(--pc-neon);
+            margin-bottom: 10px;
+        }
+        header p { color: #888; letter-spacing: 2px; font-weight: bold; }
 
-        header h1 { font-size: 2.5rem; margin-bottom: 10px; letter-spacing: -1px; }
-        header p { color: var(--text-sub); font-size: 1.1rem; }
+        .container { max-width: 1300px; margin: 0 auto; }
 
-        .container { max-width: 1200px; margin: 0 auto; }
-
-        /* 섹션 타이틀 스타일 */
-        .section-title {
+        /* 플랫폼 섹션 제목 */
+        .section-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin: 60px 0 30px;
             display: flex;
             align-items: center;
-            margin: 40px 0 20px;
-            font-size: 1.8rem;
-            border-left: 5px solid var(--accent-color);
-            padding-left: 15px;
+            gap: 15px;
         }
-        .pc-title { border-color: var(--pc-color); }
-        .mobile-title { border-color: var(--mobile-color); }
-        .console-title { border-color: var(--console-color); }
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, currentColor, transparent);
+        }
 
-        /* 그리드 레이아웃 */
-        .game-grid {
+        .pc-label { color: var(--pc-neon); }
+        .mobile-label { color: var(--mobile-neon); }
+        .console-label { color: var(--console-neon); }
+
+        /* 게임 카드 그리드 */
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 20px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
         }
 
-        /* 게임 카드 스타일 */
-        .game-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
+        /* 카드 개별 디자인 */
+        .card {
+            background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.1);
             position: relative;
+            clip-path: polygon(0 0, 90% 0, 100% 15%, 100% 100%, 10% 100%, 0 85%);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            backdrop-filter: blur(5px);
         }
 
-        .game-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        .card::before {
+            content: 'SYSTEM ACTIVE';
+            position: absolute;
+            top: 5px; right: 20px;
+            font-size: 0.6rem;
+            opacity: 0.3;
         }
 
-        .game-img {
+        .card:hover {
+            transform: scale(1.05) rotateX(5deg);
+            border-color: currentColor;
+            box-shadow: 0 0 20px currentColor;
+        }
+
+        .img-box {
             width: 100%;
-            aspect-ratio: 3 / 4;
-            background: #334155; /* 이미지 없을 때 기본 배경 */
+            height: 250px;
+            background: #111;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-sub);
-            font-size: 0.9rem;
-            object-fit: cover;
+            position: relative;
+        }
+        
+        /* 스캔라인 효과 */
+        .img-box::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
         }
 
-        .game-info {
-            padding: 15px;
+        .info-box {
+            padding: 20px;
+            background: rgba(0,0,0,0.6);
         }
 
-        .game-info h4 {
-            font-size: 1.05rem;
-            margin-bottom: 5px;
+        .info-box h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
-        .play-time {
-            font-size: 0.85rem;
-            color: var(--accent-color);
-            font-weight: bold;
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
         }
 
-        /* 애니메이션 */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .playtime { font-size: 0.9rem; color: #fff; }
+        .status-dot {
+            width: 8px; height: 8px;
+            background: currentColor;
+            border-radius: 50%;
+            box-shadow: 0 0 10px currentColor;
         }
 
-        /* 반응형 설정 */
+        /* 반응형 */
         @media (max-width: 768px) {
-            .game-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
-            header h1 { font-size: 1.8rem; }
+            header h1 { font-size: 2rem; }
+            .grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -120,67 +158,46 @@
 
 <div class="container">
     <header>
-        <h1>GAMEPLAY ARCHIVE</h1>
-        <p>게임 기획자로서의 인사이트를 쌓아온 플레이 기록입니다.</p>
+        <h1>PLAYER_DATA</h1>
+        <p>Operational Intelligence & Gameplay History</p>
     </header>
 
-    <h2 class="section-title pc-title">PC Platform</h2>
-    <div class="game-grid" id="pc-grid">
-        <script>
-            const pcGames = ["FC Online", "PUBG", "League of Legends", "Valorant", "Overwatch 2", "Lost Ark"];
-            const pcGrid = document.getElementById('pc-grid');
-            pcGames.forEach(name => {
-                pcGrid.innerHTML += `
-                    <div class="game-card">
-                        <div class="game-img">IMG</div>
-                        <div class="game-info">
-                            <h4>${name}</h4>
-                            <p class="play-time">1,500+ Hours</p>
-                        </div>
-                    </div>
-                `;
-            });
-        </script>
-    </div>
+    <div class="section-label pc-label">01 // PC_PLATFORM</div>
+    <div class="grid" id="pc-grid"></div>
 
-    <h2 class="section-title mobile-title">Mobile Platform</h2>
-    <div class="game-grid" id="mobile-grid">
-        <script>
-            const mobileGames = ["Genshin Impact", "Brawl Stars", "Cookie Run", "Blue Archive", "Nikke", "Wild Rift"];
-            const mobileGrid = document.getElementById('mobile-grid');
-            mobileGames.forEach(name => {
-                mobileGrid.innerHTML += `
-                    <div class="game-card">
-                        <div class="game-img">IMG</div>
-                        <div class="game-info">
-                            <h4>${name}</h4>
-                            <p class="play-time">500+ Hours</p>
-                        </div>
-                    </div>
-                `;
-            });
-        </script>
-    </div>
+    <div class="section-label mobile-label">02 // MOBILE_ENVIRONMENT</div>
+    <div class="grid" id="mobile-grid"></div>
 
-    <h2 class="section-title console-title">Console Platform</h2>
-    <div class="game-grid" id="console-grid">
-        <script>
-            const consoleGames = ["Elden Ring", "God of War", "Zelda: TotK", "Spider-Man 2", "Monster Hunter", "FF7 Rebirth"];
-            const consoleGrid = document.getElementById('console-grid');
-            consoleGames.forEach(name => {
-                consoleGrid.innerHTML += `
-                    <div class="game-card">
-                        <div class="game-img">IMG</div>
-                        <div class="game-info">
-                            <h4>${name}</h4>
-                            <p class="play-time">200+ Hours</p>
-                        </div>
-                    </div>
-                `;
-            });
-        </script>
-    </div>
+    <div class="section-label console-label">03 // CONSOLE_SYSTEM</div>
+    <div class="grid" id="console-grid"></div>
 </div>
+
+<script>
+    const createCards = (gridId, games, time, colorClass) => {
+        const grid = document.getElementById(gridId);
+        games.forEach(name => {
+            grid.innerHTML += `
+                <div class="card" style="color: ${colorClass}">
+                    <div class="img-box">
+                        <span style="opacity:0.2">[ NO_IMAGE ]</span>
+                    </div>
+                    <div class="info-box">
+                        <h3>${name}</h3>
+                        <div class="stats">
+                            <span class="playtime">${time}</span>
+                            <div class="status-dot"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    };
+
+    // 데이터 삽입 (원하는 게임명으로 변경하세요)
+    createCards('pc-grid', ["FC Online", "PUBG", "Valorant", "League of Legends", "Overwatch 2", "Lost Ark"], "1,200H+", "var(--pc-neon)");
+    createCards('mobile-grid', ["Genshin", "Brawl Stars", "Nikke", "Blue Archive", "Wild Rift", "Cookie Run"], "600H+", "var(--mobile-neon)");
+    createCards('console-grid', ["Elden Ring", "Zelda: TotK", "God of War", "Spiderman 2", "Monster Hunter", "FF7 Rebirth"], "300H+", "var(--console-neon)");
+</script>
 
 </body>
 </html>
