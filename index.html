@@ -25,116 +25,28 @@
             background-size: 100% 100%, 100% 4px, 3px 100%;
             color: #fff;
             padding: 50px 20px;
-            overflow-x: hidden;
+            min-height: 100vh;
         }
-
-        header {
-            text-align: center;
-            margin-bottom: 80px;
-            text-transform: uppercase;
-        }
-        header h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
-            letter-spacing: 8px;
-            color: #fff;
-            text-shadow: 0 0 10px var(--pc-neon), 0 0 20px var(--pc-neon);
-            margin-bottom: 10px;
-        }
-        header p { color: #888; letter-spacing: 2px; font-weight: bold; }
 
         .container { max-width: 1300px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 60px; text-transform: uppercase; }
+        header h1 { font-family: 'Orbitron', sans-serif; font-size: 3rem; letter-spacing: 8px; text-shadow: 0 0 10px var(--pc-neon); }
 
-        .section-label {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            margin: 80px 0 30px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .section-label::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(90deg, currentColor, transparent);
-        }
-
+        .section-label { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; margin: 80px 0 30px; display: flex; align-items: center; gap: 15px; }
+        .section-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, currentColor, transparent); }
         .pc-label { color: var(--pc-neon); }
         .mobile-label { color: var(--mobile-neon); }
         .console-label { color: var(--console-neon); }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
-        }
-
-        .card {
-            background: var(--glass);
-            border: 1px solid rgba(255,255,255,0.1);
-            position: relative;
-            clip-path: polygon(0 0, 90% 0, 100% 15%, 100% 100%, 10% 100%, 0 85%);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            overflow: hidden;
-            backdrop-filter: blur(5px);
-        }
-
-        .card:hover {
-            transform: scale(1.05) rotateX(5deg);
-            border-color: currentColor;
-            box-shadow: 0 0 20px currentColor;
-            z-index: 10;
-        }
-
-        .img-box {
-            width: 100%;
-            aspect-ratio: 4 / 3;
-            background: #111;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.8;
-            transition: opacity 0.3s;
-        }
-        .card:hover .img-box img { opacity: 1; }
-
-        .info-box {
-            padding: 20px;
-            background: rgba(0,0,0,0.6);
-        }
-
-        .info-box h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .stats {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 700;
-        }
-
-        .playtime { font-size: 0.9rem; color: #fff; }
-        .status-dot {
-            width: 8px; height: 8px;
-            background: currentColor;
-            border-radius: 50%;
-            box-shadow: 0 0 10px currentColor;
-        }
+        .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .card { background: var(--glass); border: 1px solid rgba(255,255,255,0.1); clip-path: polygon(0 0, 90% 0, 100% 15%, 100% 100%, 10% 100%, 0 85%); overflow: hidden; backdrop-filter: blur(5px); transition: 0.3s; }
+        .card:hover { transform: scale(1.03); border-color: currentColor; box-shadow: 0 0 15px currentColor; }
+        .img-box { width: 100%; aspect-ratio: 4 / 3; background: #111; position: relative; overflow: hidden; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: 0.3s; }
+        .card:hover img { opacity: 1; }
+        .info-box { padding: 15px; background: rgba(0,0,0,0.7); }
+        .info-box h3 { font-family: 'Orbitron', sans-serif; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .stats { display: flex; justify-content: space-between; font-size: 0.85rem; margin-top: 5px; }
 
         @media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
@@ -143,114 +55,102 @@
 <body>
 
 <div class="container">
-    <header>
-        <h1>PLAYER_DATA</h1>
-        <p>Operational Intelligence & Gameplay History</p>
-    </header>
+    <header><h1>PLAYER_DATA</h1><p>Operational Intelligence & Gameplay History</p></header>
 
     <div class="section-label pc-label">01 // PC_PLATFORM</div>
-    <div class="grid" id="pc-grid"></div>
+    <div id="pc-grid" class="grid"></div>
 
     <div class="section-label mobile-label">02 // MOBILE_ENVIRONMENT</div>
-    <div class="grid" id="mobile-grid"></div>
+    <div id="mobile-grid" class="grid"></div>
 
     <div class="section-label console-label">03 // CONSOLE_SYSTEM</div>
-    <div class="grid" id="console-grid"></div>
+    <div id="console-grid" class="grid"></div>
 </div>
 
 <script>
-    const parseTimeToMonths = (timeStr) => {
-        if (timeStr.includes('년')) return parseInt(timeStr) * 12;
-        if (timeStr.includes('개월')) return parseInt(timeStr);
-        return 0;
-    };
+    const parseTime = (t) => t.includes('년') ? parseInt(t) * 12 : parseInt(t);
 
-    const createCards = (gridId, gameData, colorVar) => {
-        const grid = document.getElementById(gridId);
-        const sortedData = [...gameData].sort((a, b) => parseTimeToMonths(b.time) - parseTimeToMonths(a.time));
-
-        sortedData.forEach(game => {
+    const render = (id, data, color) => {
+        const grid = document.getElementById(id);
+        // 플레이 시간 많은 순서대로 정렬
+        const sorted = [...data].sort((a, b) => parseTime(b.time) - parseTime(a.time));
+        
+        sorted.forEach(g => {
             grid.innerHTML += `
-                <div class="card" style="color: ${colorVar}">
+                <div class="card" style="color: ${color}">
                     <div class="img-box">
-                        <img src="${game.url}" alt="${game.name}" onerror="this.src='https://via.placeholder.com/400x300/111/555?text=IMAGE+ERROR';">
+                        <img src="images/${g.img}.jpg" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300/111/555?text=IMAGE+MISSING';">
                     </div>
                     <div class="info-box">
-                        <h3>${game.name}</h3>
-                        <div class="stats">
-                            <span class="playtime">${game.time} 플레이</span>
-                            <div class="status-dot"></div>
-                        </div>
+                        <h3>${g.name}</h3>
+                        <div class="stats"><span>${g.time} 플레이</span><div style="width:8px; height:8px; background:currentColor; border-radius:50%;"></div></div>
                     </div>
-                </div>
-            `;
+                </div>`;
         });
     };
 
-    // PC DATA - 스팀 및 공식 주소 활용 (총 20종)
     const pcGames = [
-        {name: "FC 온라인", time: "15년", url: "https://fo4.nexon.com/images/common/main_kv.jpg"},
-        {name: "스타크래프트", time: "12년", url: "https://images.blz-contentstack.com/v3/assets/blt904085465668b813/blt97800c14c77f0030/5db0969d7249335f60b41195/sc-standard-0.jpg"},
-        {name: "배틀그라운드", time: "7년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/578080/capsule_617x353.jpg"},
-        {name: "리그 오브 레전드", time: "10년", url: "https://cmsassets.rgpub.io/assets/v3/assets/blt731fd9a8162e7a3e/blt46700c25608d0e74/65ba6efd42018880629f1707/HP_LOL_KV.jpg"},
-        {name: "오버워치", time: "8년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2357570/capsule_617x353.jpg"},
-        {name: "서든어택", time: "5년", url: "https://sa.nexon.com/images/main/v3/visual_01.jpg"},
-        {name: "메이플스토리", time: "8년", url: "https://maplestory.nexon.com/images/common/logo_maplestory.png"},
-        {name: "로스트아크", time: "3년", url: "https://cdn-lostark.game.onstove.com/2018/static/images/common/share/share_lostark.png"},
-        {name: "카트라이더", time: "5년", url: "https://kart.nexon.com/images/common/logo.png"},
-        {name: "크레이지아케이드", time: "5년", url: "https://ca.nexon.com/images/common/logo.png"},
-        {name: "카운터 스트라이크", time: "5년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/730/capsule_617x353.jpg"},
-        {name: "철권 8", time: "1년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1778820/capsule_617x353.jpg"},
-        {name: "어몽어스", time: "1년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/945360/capsule_617x353.jpg"},
-        {name: "구스구스덕", time: "1년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1568590/capsule_617x353.jpg"},
-        {name: "아이온2", time: "6개월", url: "https://image.ytn.co.kr/general/jpg/2018/1108/201811081110065096_d.jpg"},
-        {name: "워록", time: "3년", url: "https://warrock.valofe.com/img/main/visual_01.jpg"},
-        {name: "에이펙스 레전드", time: "1년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1172470/capsule_617x353.jpg"},
-        {name: "메이플스토리2", time: "2년", url: "https://maplestory2.nexon.com/images/common/logo_maplestory2.png"},
-        {name: "마구마구", time: "3년", url: "https://ma9.netmarble.net/images/common/logo.png"},
-        {name: "크로스파이어", time: "1년", url: "https://crossfire.z8games.com/images/common/logo.png"}
+        {name: "FC 온라인", time: "15년", img: "fc-online"},
+        {name: "스타크래프트", time: "12년", img: "starcraft"},
+        {name: "리그 오브 레전드", time: "10년", img: "lol"},
+        {name: "오버워치", time: "8년", img: "overwatch"},
+        {name: "메이플스토리", time: "8년", img: "maple"},
+        {name: "배틀그라운드", time: "7년", img: "pubg"},
+        {name: "서든어택", time: "5년", img: "sudden"},
+        {name: "카운터 스트라이크", time: "5년", img: "cs"},
+        {name: "카트라이더", time: "5년", img: "kart"},
+        {name: "크레이지아케이드", time: "5년", img: "crazy-arcade"},
+        {name: "로스트아크", time: "3년", img: "lostark"},
+        {name: "워록", time: "3년", img: "warrock"},
+        {name: "마구마구", time: "3년", img: "magu"},
+        {name: "메이플스토리2", time: "2년", img: "maple2"},
+        {name: "에이펙스 레전드", time: "1년", img: "apex"},
+        {name: "철권 8", time: "1년", img: "tekken8"},
+        {name: "어몽어스", time: "1년", img: "among-us"},
+        {name: "구스구스덕", time: "1년", img: "goose-duck"},
+        {name: "크로스파이어", time: "1년", img: "crossfire"},
+        {name: "아이온2", time: "6개월", img: "aion2"}
     ];
 
-    // MOBILE DATA (총 16종)
     const mobileGames = [
-        {name: "컴투스프로야구", time: "8년", url: "https://image.com2us.com/com2us/promotion/v01/2023/cpb_2023_main_logo.png"},
-        {name: "전략적 팀 전투", time: "5년", url: "https://images.contentstack.io/v3/assets/blt731fd9a8162e7a3e/blt396f4244b41829e2/5f2845347f7d984c79435d04/TFT_Mobile_KeyArt.jpg"},
-        {name: "쿠키런", time: "5년", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple122/v4/65/56/74/65567434-601d-720d-888e-688828888888/AppIcon-0-1x_U007emarketing-0-7-0-85-220.png/512x512bb.jpg"},
-        {name: "모두의 마블", time: "2년", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple112/v4/0d/1b/4f/0d1b4f4c-1234-5678-90ab-cdef12345678/AppIcon-0-1x_U007emarketing-0-7-0-85-220.png/512x512bb.jpg"},
-        {name: "템플런", time: "2년", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/0d/1b/4f/0d1b4f4c-1e6a-1e6a-1e6a-1e6a1e6a1e6a/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-10.png/512x512bb.jpg"},
-        {name: "리듬 스타", time: "2년", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple112/v4/0d/1b/4f/0d1b4f4c-0000-0000-0000-000000000000/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-10.png/512x512bb.jpg"},
-        {name: "앵그리버드", time: "1년", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/0d/1b/4f/0d1b4f4c-1e6a-1e6a-1e6a-1e6a1e6a1e6a/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-10.png/512x512bb.jpg"},
-        {name: "블루아카이브", time: "3개월", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple122/v4/0d/1b/4f/0d1b4f4c-1e6a-1e6a-1e6a-1e6a1e6a1e6a/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-10.png/512x512bb.jpg"},
-        {name: "미니게임천국", time: "3년", url: "https://image.com2us.com/com2us/promotion/v01/2023/mgh_2023_main.png"},
-        {name: "PES (eFootball)", time: "3년", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/03/61/8b/03618b7a-36b1-4f1b-944f-1234567890ab/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/512x512bb.jpg"},
-        {name: "MLB 라이벌", time: "1년", url: "https://image.com2us.com/com2us/promotion/v01/2023/mlb_rival_main.png"},
-        {name: "니케", time: "6개월", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple112/v4/0d/1b/4f/0d1b4f4c-1e6a-1e6a-1e6a-1e6a1e6a1e6a/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-10.png/512x512bb.jpg"},
-        {name: "하스스톤", time: "3개월", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/0d/1b/4f/0d1b4f4c-1e6a-1e6a-1e6a-1e6a1e6a1e6a/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-10.png/512x512bb.jpg"},
-        {name: "브레인 아웃", time: "1년", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/0d/1b/4f/0d1b4f4c-1e6a-1e6a-1e6a-1e6a1e6a1e6a/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-10.png/512x512bb.jpg"},
-        {name: "메이플 키우기", time: "6개월", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple112/v4/31/35/33/31353355-1234-5678-90ab-cdef12345678/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/512x512bb.jpg"},
-        {name: "프렌즈 사천성", time: "2년", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple112/v4/44/44/44/44444444-1234-5678-90ab-cdef12345678/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/512x512bb.jpg"}
+        {name: "컴투스프로야구", time: "8년", img: "com2us"},
+        {name: "전략적 팀 전투", time: "5년", img: "tft"},
+        {name: "쿠키런", time: "5년", img: "cookierun"},
+        {name: "미니게임천국", time: "3년", img: "minigame"},
+        {name: "PES (eFootball)", time: "3년", img: "pes"},
+        {name: "모두의 마블", time: "2년", img: "modoo-marble"},
+        {name: "템플런", time: "2년", img: "temple-run"},
+        {name: "리듬 스타", time: "2년", img: "rhythm-star"},
+        {name: "프렌즈 사천성", time: "2년", img: "sachunsung"},
+        {name: "브레인 아웃", time: "1년", img: "brainout"},
+        {name: "MLB 라이벌", time: "1년", img: "mlb-rival"},
+        {name: "앵그리버드", time: "1년", img: "angry-birds"},
+        {name: "니케", time: "6개월", img: "nikke"},
+        {name: "메이플 키우기", time: "6개월", img: "maple-raise"},
+        {name: "하스스톤", time: "3개월", img: "hearthstone"},
+        {name: "블루아카이브", time: "3개월", img: "blue-archive"}
     ];
 
-    // CONSOLE DATA (총 12종)
     const consoleGames = [
-        {name: "FIFA 시리즈", time: "10년", url: "https://www.ea.com/news/ea-sports-fc-24-header-image.jpg"},
-        {name: "풋볼 매니저", time: "8년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2252570/capsule_617x353.jpg"},
-        {name: "나루토 질풍전", time: "2년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/495140/capsule_617x353.jpg"},
-        {name: "MLB The Show", time: "1년", url: "https://i.ytimg.com/vi/QWJ6Oq1D66U/maxresdefault.jpg"},
-        {name: "잇 테이크 투", time: "1년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1426210/capsule_617x353.jpg"},
-        {name: "원피스 버닝 블러드", time: "1년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/425220/capsule_617x353.jpg"},
-        {name: "아크 레이더스", time: "6개월", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1795030/capsule_617x353.jpg"},
-        {name: "퍼스트 디센던트", time: "6개월", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2074900/capsule_617x353.jpg"},
-        {name: "엘든 링", time: "3개월", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/capsule_617x353.jpg"},
-        {name: "P의 거짓", time: "3개월", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1627720/capsule_617x353.jpg"},
-        {name: "젤다의 전설", time: "3개월", url: "https://www.nintendo.co.kr/zelda/totk/assets/img/common/share.jpg"},
-        {name: "인피니도트2", time: "3개월", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/937310/capsule_617x353.jpg"}
+        {name: "FIFA 시리즈", time: "10년", img: "fifa"},
+        {name: "풋볼 매니저", time: "8년", img: "fm"},
+        {name: "나루토 질풍전", time: "2년", img: "naruto"},
+        {name: "MLB The Show", time: "1년", img: "mlb-show"},
+        {name: "잇 테이크 투", time: "1년", img: "ittakestwo"},
+        {name: "원피스 버닝 블러드", time: "1년", img: "onepiece"},
+        {name: "아크 레이더스", time: "6개월", img: "arc-raiders"},
+        {name: "퍼스트 디센던트", time: "6개월", img: "first-descendant"},
+        {name: "엘든 링", time: "3개월", img: "elden-ring"},
+        {name: "P의 거짓", time: "3개월", img: "lies-of-p"},
+        {name: "젤다의 전설", time: "3개월", img: "zelda"},
+        {name: "인피니도트2", time: "3개월", img: "infinitode2"}
     ];
 
-    createCards('pc-grid', pcGames, "var(--pc-neon)");
-    createCards('mobile-grid', mobileGames, "var(--mobile-neon)");
-    createCards('console-grid', consoleGames, "var(--console-neon)");
+    document.addEventListener('DOMContentLoaded', () => {
+        render('pc-grid', pcGames, "var(--pc-neon)");
+        render('mobile-grid', mobileGames, "var(--mobile-neon)");
+        render('console-grid', consoleGames, "var(--console-neon)");
+    });
 </script>
-
 </body>
 </html>
