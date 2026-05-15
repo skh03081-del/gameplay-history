@@ -3,53 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAMEPLAY ARCHIVE | JYLEE</title>
+    <title>LEE JAE YOUNG // GAME PLAY LIST</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Image 0 기반의 전문적인 다크 모드 스타일 */
+        /* 포트폴리오 다크 모드 표준 스타일 */
         :root {
-            --bg-color: #0d1117;     /* 짙은 배경 */
-            --card-bg: #161b22;      /* 카드 배경 */
-            --text-main: #e6edf3;    /* 연한 회색 텍스트 */
-            --text-sub: #8b949e;     /* 더 옅은 회색 */
-            --accent-cyan: #58a6ff;  /* 전문적인 시안색 포인트 */
+            --bg-deep: #0a0c10;
+            --card-bg: #1c2128;
+            --text-main: #e6edf3;
+            --text-sub: #8b949e;
+            --accent-cyan: #58a6ff;  /* 전문적인 시안색 */
             --border-color: #30363d;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Noto Sans KR', -apple-system, sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-deep);
             color: var(--text-main);
             line-height: 1.6;
             padding: 80px 20px;
+            min-height: 100vh;
         }
 
         .container { max-width: 1300px; margin: 0 auto; }
 
-        /* 헤더 디자인 (Image 0 스타일 적용) */
+        /* 헤더 디자인 (요청하신 대로 단순화) */
         header {
             text-align: center;
             margin-bottom: 100px;
-            padding-bottom: 50px;
+            padding-bottom: 40px;
             border-bottom: 1px solid var(--border-color);
         }
         header h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 700;
             color: #fff;
-            letter-spacing: -2px;
-            margin-bottom: 20px;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
         }
-        header p {
-            font-size: 1.3rem;
+        header .name-tag {
+            font-size: 1.2rem;
             color: var(--text-sub);
-            max-width: 600px;
-            margin: 0 auto;
+            letter-spacing: 5px;
+            font-weight: 400;
         }
 
-        /* 플랫폼 섹션 제목 */
+        /* 플랫폼 섹션 제목 (PLATFORM 등 제거) */
         .section-label {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.8rem;
@@ -66,7 +67,7 @@
             background: linear-gradient(90deg, var(--border-color), transparent);
         }
 
-        /* 그리드 설정: 한 줄에 4개 */
+        /* 그리드 */
         .grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -89,26 +90,16 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* [핵심] 시네마틱 이미지 컨테이너: 절대 안 짤림 */
+        /* [핵심] 사진 안 짤리고 전체 노출되게 디자인 수정 */
         .img-box {
             position: relative;
             width: 100%;
             aspect-ratio: 4 / 3; /* 카드 비율 고정 */
-            background: #000;
+            background: #000; /* 빈 공간 배경색 */
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        /* 배경 블러 이미지 (빈 공간 채우기용) */
-        .img-blur-bg {
-            position: absolute;
-            width: 120%;
-            height: 120%;
-            object-fit: cover; /* 배경은 채워야 함 */
-            filter: blur(15px) brightness(0.4); /* 소프트한 블러 및 어둡게 처리 */
-            z-index: 1;
         }
 
         /* 메인 이미지 (전체 노출) */
@@ -117,7 +108,7 @@
             z-index: 2;
             max-width: 100%;
             max-height: 100%;
-            object-fit: contain; /* [중요] 절대 잘리지 않고 전체 다 보여줌 */
+            object-fit: contain; /* [중요] 절대 잘리지 않고 전체 다 보여줌 (개발 표준) */
             transition: transform 0.3s ease;
         }
         .card:hover .img-main { transform: scale(1.05); }
@@ -131,7 +122,7 @@
             justify-content: space-between;
         }
         .info-box h3 {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: #fff;
             margin-bottom: 15px;
@@ -146,16 +137,16 @@
             align-items: center;
         }
 
-        /* 플레이 기간 (Image 0 스타일 대괄호) */
+        /* 플레이 기간 대괄호 표시 */
         .time {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-sub);
         }
 
-        /* [수정] 장르 노출 (Image 0 스타일 시안색 포인트) */
+        /* 장르 데이터 노출 */
         .genre {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--accent-cyan);
             font-weight: 700;
             text-transform: uppercase;
@@ -163,24 +154,24 @@
         }
 
         @media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } header h1 { font-size: 2.5rem; } }
+        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; header h1 { font-size: 2.2rem; } } }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>GAMEPLAY ARCHIVE</h1>
-        <p>기획자의 시선으로 분석한 장르별 플레이 이력 및 데이터베이스</p>
+        <h1>LEE JAE YOUNG // GAME PLAY LIST</h1>
+        <p class="name-tag">DEVELOPER & PLANNER ARCHIVE</p>
     </header>
 
-    <div class="section-label">01. PC_PLATFORM</div>
+    <div class="section-label">01. PC</div>
     <div id="pc-grid" class="grid"></div>
 
-    <div class="section-label">02. MOBILE_ENVIRONMENT</div>
+    <div class="section-label">02. MOBILE</div>
     <div id="mobile-grid" class="grid"></div>
 
-    <div class="section-label">03. CONSOLE_SYSTEM</div>
+    <div class="section-label">03. CONSOLE</div>
     <div id="console-grid" class="grid"></div>
 </div>
 
@@ -189,14 +180,16 @@
 
     const render = (id, data) => {
         const grid = document.getElementById(id);
+        if (!grid) return;
+
+        // 플레이 시간 많은 순서 정렬
         const sorted = [...data].sort((a, b) => parseTime(b.time) - parseTime(a.time));
         
         sorted.forEach(g => {
             grid.innerHTML += `
                 <div class="card">
                     <div class="img-box">
-                        <img src="${g.url}" class="img-blur-bg">
-                        <img src="${g.url}" alt="${g.name}" class="img-main" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300/111/333?text=IMAGE+ERROR';">
+                        <img src="${g.img}.jpg" alt="${g.name}" class="img-main" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300/111/333?text=IMAGE+MISSING';">
                     </div>
                     <div class="info-box">
                         <h3>${g.name}</h3>
@@ -209,62 +202,62 @@
         });
     };
 
-    // 데이터 리스트 (장르 추가 완료)
+    // [핵심] 'img' 값은 깃허브 최상위에 올린 파일명과 '반드시 대소문자까지' 똑같아야 합니다.
     const pcGames = [
-        {name: "FC 온라인", time: "15년", url: "https://fo4.nexon.com/images/common/main_kv.jpg", genre: "Sports"},
-        {name: "스타크래프트", time: "12년", url: "https://images.blz-contentstack.com/v3/assets/blt904085465668b813/blt97800c14c77f0030/5db0969d7249335f60b41195/sc-standard-0.jpg", genre: "RTS"},
-        {name: "리그 오브 레전드", time: "10년", url: "https://cmsassets.rgpub.io/assets/v3/assets/blt731fd9a8162e7a3e/blt46700c25608d0e74/65ba6efd42018880629f1707/HP_LOL_KV.jpg", genre: "MOBA"},
-        {name: "오버워치", time: "8년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2357570/capsule_617x353.jpg", genre: "FPS"},
-        {name: "메이플스토리", time: "8년", url: "https://maplestory.nexon.com/images/common/logo_maplestory.png", genre: "MMORPG"},
-        {name: "배틀그라운드", time: "7년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/578080/capsule_617x353.jpg", genre: "Battle Royale"},
-        {name: "서든어택", time: "5년", url: "https://sa.nexon.com/images/main/v3/visual_01.jpg", genre: "FPS"},
-        {name: "카운터 스트라이크", time: "5년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/730/capsule_617x353.jpg", genre: "FPS"},
-        {name: "카트라이더", time: "5년", url: "https://kart.nexon.com/images/common/logo.png", genre: "Racing"},
-        {name: "크레이지아케이드", time: "5년", url: "https://ca.nexon.com/images/common/logo.png", genre: "Casual"},
-        {name: "로스트아크", time: "3년", url: "https://cdn-lostark.game.onstove.com/2018/static/images/common/share/share_lostark.png", genre: "MMORPG"},
-        {name: "워록", time: "3년", url: "https://warrock.valofe.com/img/main/visual_01.jpg", genre: "FPS"},
-        {name: "마구마구", time: "3년", url: "https://ma9.netmarble.net/images/common/logo.png", genre: "Sports"},
-        {name: "메이플스토리2", time: "2년", url: "https://maplestory2.nexon.com/images/common/logo_maplestory2.png", genre: "MMORPG"},
-        {name: "에이펙스 레전드", time: "1년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1172470/capsule_617x353.jpg", genre: "FPS"},
-        {name: "철권 8", time: "1년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1778820/capsule_617x353.jpg", genre: "Fighting"},
-        {name: "어몽어스", time: "1년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/945360/capsule_617x353.jpg", genre: "Social"},
-        {name: "구스구스덕", time: "1년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1568590/capsule_617x353.jpg", genre: "Social"},
-        {name: "크로스파이어", time: "1년", url: "https://crossfire.z8games.com/images/common/logo.png", genre: "FPS"},
-        {name: "아이온2", time: "6개월", url: "https://image.ytn.co.kr/general/jpg/2018/1108/201811081110065096_d.jpg", genre: "MMORPG"}
+        {name: "FC 온라인", time: "15년", img: "fc-online", genre: "Sports"},
+        {name: "스타크래프트", time: "12년", img: "starcraft", genre: "RTS"},
+        {name: "리그 오브 레전드", time: "10년", img: "lol", genre: "MOBA"},
+        {name: "오버워치", time: "8년", img: "overwatch", genre: "FPS"},
+        {name: "메이플스토리", time: "8년", img: "maple", genre: "MMORPG"},
+        {name: "배틀그라운드", time: "7년", img: "pubg", genre: "Battle Royale"},
+        {name: "서든어택", time: "5년", img: "sudden", genre: "FPS"},
+        {name: "카운터 스트라이크", time: "5년", img: "cs", genre: "FPS"},
+        {name: "카트라이더", time: "5년", img: "kart", genre: "Racing"},
+        {name: "크레이지아케이드", time: "5년", img: "crazy-arcade", genre: "Casual"},
+        {name: "로스트아크", time: "3년", img: "lostark", genre: "MMORPG"},
+        {name: "워록", time: "3년", img: "warrock", genre: "FPS"},
+        {name: "마구마구", time: "3년", img: "magu", genre: "Sports"},
+        {name: "메이플스토리2", time: "2년", img: "maple2", genre: "MMORPG"},
+        {name: "에이펙스 레전드", time: "1년", img: "apex", genre: "FPS"},
+        {name: "철권 8", time: "1년", img: "tekken8", genre: "Fighting"},
+        {name: "어몽어스", time: "1년", img: "among-us", genre: "Social"},
+        {name: "구스구스덕", time: "1년", img: "goose-duck", genre: "Social"},
+        {name: "크로스파이어", time: "1년", img: "crossfire", genre: "FPS"},
+        {name: "아이온2", time: "6개월", img: "aion2", genre: "MMORPG"}
     ];
 
     const mobileGames = [
-        {name: "컴투스프로야구", time: "8년", url: "https://image.com2us.com/com2us/promotion/v01/2023/cpb_2023_main_logo.png", genre: "Sports"},
-        {name: "전략적 팀 전투", time: "5년", url: "https://images.contentstack.io/v3/assets/blt731fd9a8162e7a3e/blt396f4244b41829e2/5f2845347f7d984c79435d04/TFT_Mobile_KeyArt.jpg", genre: "Auto Battler"},
-        {name: "쿠키런", time: "5년", url: "https://cookierun.com/img/common/share-image.png", genre: "Casual"},
-        {name: "미니게임천국", time: "3년", url: "https://image.com2us.com/com2us/promotion/v01/2023/mgh_2023_main.png", genre: "Casual"},
-        {name: "PES (eFootball)", time: "3년", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/03/61/8b/03618b7a-36b1-4f1b-944f-1234567890ab/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/512x512bb.jpg", genre: "Sports"},
-        {name: "모두의 마블", time: "2년", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple112/v4/0d/1b/4f/0d1b4f4c-1234-5678-90ab-cdef12345678/AppIcon-0-1x_U007emarketing-0-7-0-85-220.png/512x512bb.jpg", genre: "Board"},
-        {name: "템플런", time: "2년", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/0d/1b/4f/0d1b4f4c-1e6a-1e6a-1e6a-1e6a1e6a1e6a/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-10.png/512x512bb.jpg", genre: "Casual"},
-        {name: "리듬 스타", time: "2년", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple112/v4/0d/1b/4f/0d1b4f4c-0000-0000-0000-000000000000/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-10.png/512x512bb.jpg", genre: "Rhythm"},
-        {name: "프렌즈 사천성", time: "2년", url: "https://image.game.kakao.com/mks/mkss/mkss_20220614_102148_908.jpg", genre: "Puzzle"},
-        {name: "브레인 아웃", time: "1년", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/0d/1b/4f/0d1b4f4c-1e6a-1e6a-1e6a-1e6a1e6a1e6a/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-10.png/512x512bb.jpg", genre: "Puzzle"},
-        {name: "MLB 라이벌", time: "1년", url: "https://image.com2us.com/com2us/promotion/v01/2023/mlb_rival_main.png", genre: "Sports"},
-        {name: "앵그리버드", time: "1년", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/0d/1b/4f/0d1b4f4c-1e6a-1e6a-1e6a-1e6a1e6a1e6a/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-10.png/512x512bb.jpg", genre: "Casual"},
-        {name: "니케", time: "6개월", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple112/v4/0d/1b/4f/0d1b4f4c-1e6a-1e6a-1e6a-1e6a1e6a1e6a/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-10.png/512x512bb.jpg", genre: "Shooting"},
-        {name: "메이플 키우기", time: "6개월", url: "https://i.ytimg.com/vi/1_8Xg-r3B-Q/maxresdefault.jpg", genre: "Idle RPG"},
-        {name: "하스스톤", time: "3개월", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/0d/1b/4f/0d1b4f4c-1e6a-1e6a-1e6a-1e6a1e6a1e6a/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-10.png/512x512bb.jpg", genre: "Card Game"},
-        {name: "블루아카이브", time: "3개월", url: "https://is1-ssl.mzstatic.com/image/thumb/Purple122/v4/0d/1b/4f/0d1b4f4c-1e6a-1e6a-1e6a-1e6a1e6a1e6a/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-10.png/512x512bb.jpg", genre: "Subculture"}
+        {name: "컴투스프로야구", time: "8년", img: "com2us", genre: "Sports"},
+        {name: "전략적 팀 전투", time: "5년", img: "tft", genre: "Auto Battler"},
+        {name: "쿠키런", time: "5년", img: "cookierun", genre: "Casual"},
+        {name: "미니게임천국", time: "3년", img: "minigame", genre: "Casual"},
+        {name: "PES (eFootball)", time: "3년", img: "pes", genre: "Sports"},
+        {name: "모두의 마블", time: "2년", img: "modoo-marble", genre: "Board"},
+        {name: "템플런", time: "2년", img: "temple-run", genre: "Casual"},
+        {name: "리듬 스타", time: "2년", img: "rhythm-star", genre: "Rhythm"},
+        {name: "프렌즈 사천성", time: "2년", img: "sachunsung", genre: "Puzzle"},
+        {name: "브레인 아웃", time: "1년", img: "brainout", genre: "Puzzle"},
+        {name: "MLB 라이벌", time: "1년", img: "mlb-rival", genre: "Sports"},
+        {name: "앵그리버드", time: "1년", img: "angry-birds", genre: "Casual"},
+        {name: "니케", time: "6개월", img: "nikke", genre: "Shooting"},
+        {name: "메이플 키우기", time: "6개월", img: "maple-raise", genre: "Idle RPG"},
+        {name: "하스스톤", time: "3개월", img: "hearthstone", genre: "Card Game"},
+        {name: "블루아카이브", time: "3개월", img: "blue-archive", genre: "Subculture"}
     ];
 
     const consoleGames = [
-        {name: "FIFA 시리즈", time: "10년", url: "https://www.ea.com/news/ea-sports-fc-24-header-image.jpg", genre: "Sports"},
-        {name: "풋볼 매니저", time: "8년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2252570/capsule_617x353.jpg", genre: "Simulation"},
-        {name: "나루토 질풍전", time: "2년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/495140/capsule_617x353.jpg", genre: "Action"},
-        {name: "MLB The Show", time: "1년", url: "https://i.ytimg.com/vi/QWJ6Oq1D66U/maxresdefault.jpg", genre: "Sports"},
-        {name: "잇 테이크 투", time: "1년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1426210/capsule_617x353.jpg", genre: "Co-op"},
-        {name: "원피스 버닝 블러드", time: "1년", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/425220/capsule_617x353.jpg", genre: "Action"},
-        {name: "아크 레이더스", time: "6개월", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1795030/capsule_617x353.jpg", genre: "TPS"},
-        {name: "퍼스트 디센던트", time: "6개월", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2074900/capsule_617x353.jpg", genre: "Looter Shooter"},
-        {name: "엘든 링", time: "3개월", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/capsule_617x353.jpg", genre: "Action RPG"},
-        {name: "P의 거짓", time: "3개월", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1627720/capsule_617x353.jpg", genre: "Soulslike"},
-        {name: "젤다의 전설", time: "3개월", url: "https://www.nintendo.co.kr/zelda/totk/assets/img/common/share.jpg", genre: "Adventure"},
-        {name: "인피니도트2", time: "3개월", url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/937310/capsule_617x353.jpg", genre: "Tower Defense"}
+        {name: "FIFA 시리즈", time: "10년", img: "fifa", genre: "Sports"},
+        {name: "풋볼 매니저", time: "8년", img: "fm", genre: "Simulation"},
+        {name: "나루토 질풍전", time: "2년", img: "naruto", genre: "Action"},
+        {name: "MLB The Show", time: "1년", img: "mlb-show", genre: "Sports"},
+        {name: "잇 테이크 투", time: "1년", img: "ittakestwo", genre: "Co-op"},
+        {name: "원피스 버닝 블러드", time: "1년", img: "onepiece", genre: "Action"},
+        {name: "아크 레이더스", time: "6개월", img: "arc-raiders", genre: "TPS"},
+        {name: "퍼스트 디센던트", time: "6개월", img: "first-descendant", genre: "Looter Shooter"},
+        {name: "엘든 링", time: "3개월", img: "elden-ring", genre: "Action RPG"},
+        {name: "P의 거짓", time: "3개월", img: "lies-of-p", genre: "Soulslike"},
+        {name: "젤다의 전설", time: "3개월", img: "zelda", genre: "Adventure"},
+        {name: "인피니도트2", time: "3개월", img: "infinitode2", genre: "Tower Defense"}
     ];
 
     document.addEventListener('DOMContentLoaded', () => {
