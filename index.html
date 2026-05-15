@@ -5,233 +5,286 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gameplay History | JYLEE</title>
     <style>
+        /* Image 0 기반 다크 모드 스타일 */
         :root {
-            --primary-color: #2ecc71;
-            --bg-color: #f8f9fa;
-            --card-bg: #ffffff;
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --text-color: #c9d1d9;
+            --accent-color: #58a6ff; /* 시안색 강조 */
+            --border-color: #30363d;
+            --tag-color: #8b949e;
         }
-        body { font-family: 'Malgun Gothic', sans-serif; background-color: var(--bg-color); margin: 0; padding: 40px; color: #333; }
-        h1 { text-align: center; color: #2c3e50; margin-bottom: 50px; }
-        h2 { border-left: 5px solid var(--primary-color); padding-left: 15px; margin-top: 60px; color: #2c3e50; }
-        
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 40px;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+            color: var(--text-color);
+        }
+
+        /* 플랫폼 섹션 제목 */
+        h2 {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-top: 60px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         /* 그리드 설정: 한 줄에 4개 */
-        .game-grid { 
-            display: grid; 
-            grid-template-columns: repeat(4, 1fr); 
-            gap: 25px; 
-            margin-top: 20px;
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
         }
 
-        .game-card { 
-            background: var(--card-bg); 
-            border-radius: 12px; 
-            overflow: hidden; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
+        .game-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s;
         }
-        .game-card:hover { transform: translateY(-5px); }
 
-        /* 이미지 비율 설정: 가로가 긴 4:3 비율 */
-        .image-container {
+        .game-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        /* 4:3 이미지 영역 */
+        .thumb {
             width: 100%;
             aspect-ratio: 4 / 3;
-            background-color: #ddd;
+            background-color: #30363d; /* 이미지 없을 때 배경 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
         }
-        .image-container img {
+
+        .thumb img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .info { padding: 15px; }
-        .platform { font-size: 0.8em; color: #7f8c8d; font-weight: bold; }
-        .title { font-size: 1.1em; font-weight: bold; margin: 5px 0; display: block; }
-        .duration { color: var(--primary-color); font-weight: bold; font-size: 0.9em; }
+        /* 게임 정보 */
+        .info {
+            padding: 15px;
+        }
 
+        .title {
+            font-size: 1rem;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+
+        .meta {
+            font-size: 0.85rem;
+            color: var(--tag-color);
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .duration {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        /* 반응형 설정 */
         @media (max-width: 1024px) { .game-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { .game-grid { grid-template-columns: repeat(1, 1fr); } }
+        @media (max-width: 600px) { .game-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <h1>🎮 Gameplay History & Analysis</h1>
+<div class="container">
+    <h1>🎮 Gameplay Experience</h1>
 
-    <h2>Sports & Management</h2>
+    <h2>💻 PC Platform</h2>
     <div class="game-grid">
         <div class="game-card">
-            <div class="image-container"><img src="images/fc-online.jpg" alt="FC 온라인"></div>
-            <div class="info"><span class="platform">PC</span><span class="title">FC 온라인</span><span class="duration">15년 플레이</span></div>
+            <div class="thumb"><img src="images/fc-online.jpg" alt="FC 온라인"></div>
+            <div class="info"><span class="title">FC 온라인</span><div class="meta"><span class="duration">15년 플레이</span><span>스포츠</span></div></div>
         </div>
         <div class="game-card">
-            <div class="image-container"><img src="images/fifa.jpg" alt="FIFA"></div>
-            <div class="info"><span class="platform">Console</span><span class="title">FIFA 시리즈</span><span class="duration">10년 플레이</span></div>
+            <div class="thumb"><img src="images/starcraft.jpg" alt="스타크래프트"></div>
+            <div class="info"><span class="title">스타크래프트</span><div class="meta"><span class="duration">12년 플레이</span><span>RTS / 전략</span></div></div>
         </div>
         <div class="game-card">
-            <div class="image-container"><img src="images/fm.jpg" alt="FM"></div>
-            <div class="info"><span class="platform">Console</span><span class="title">풋볼 매니저 (FM)</span><span class="duration">8년 플레이</span></div>
+            <div class="thumb"><img src="images/lol.jpg" alt="리그 오브 레전드"></div>
+            <div class="info"><span class="title">리그 오브 레전드</span><div class="meta"><span class="duration">10년 플레이</span><span>MOBA</span></div></div>
         </div>
         <div class="game-card">
-            <div class="image-container"><img src="images/com2us-pro.jpg" alt="컴투스프로야구"></div>
-            <div class="info"><span class="platform">Mobile</span><span class="title">컴투스프로야구 시리즈</span><span class="duration">8년 플레이</span></div>
+            <div class="thumb"><img src="images/overwatch.jpg" alt="오버워치"></div>
+            <div class="info"><span class="title">오버워치</span><div class="meta"><span class="duration">8년 플레이</span><span>FPS</span></div></div>
         </div>
         <div class="game-card">
-            <div class="image-container"><img src="images/pes.jpg" alt="PES"></div>
-            <div class="info"><span class="platform">Mobile</span><span class="title">PES (eFootball)</span><span class="duration">3년 플레이</span></div>
+            <div class="thumb"><img src="images/maple.jpg" alt="메이플스토리"></div>
+            <div class="info"><span class="title">메이플스토리</span><div class="meta"><span class="duration">8년 플레이</span><span>MMORPG</span></div></div>
         </div>
         <div class="game-card">
-            <div class="image-container"><img src="images/magu.jpg" alt="마구마구"></div>
-            <div class="info"><span class="platform">PC</span><span class="title">마구마구</span><span class="duration">3년 플레이</span></div>
+            <div class="thumb"><img src="images/pubg.jpg" alt="배틀그라운드"></div>
+            <div class="info"><span class="title">배틀그라운드</span><div class="meta"><span class="duration">7년 플레이</span><span>배틀로얄 / FPS</span></div></div>
         </div>
         <div class="game-card">
-            <div class="image-container"><img src="images/mlb-show.jpg" alt="MLB The Show"></div>
-            <div class="info"><span class="platform">Console</span><span class="title">MLB The Show 시리즈</span><span class="duration">1년 플레이</span></div>
+            <div class="thumb"><img src="images/sudden.jpg" alt="서든어택"></div>
+            <div class="info"><span class="title">서든어택</span><div class="meta"><span class="duration">5년 플레이</span><span>FPS</span></div></div>
         </div>
         <div class="game-card">
-            <div class="image-container"><img src="images/mlb-rival.jpg" alt="MLB 라이벌"></div>
-            <div class="info"><span class="platform">Mobile</span><span class="title">MLB 라이벌</span><span class="duration">1년 플레이</span></div>
+            <div class="thumb"><img src="images/cs.jpg" alt="카운터 스트라이크"></div>
+            <div class="info"><span class="title">카운터 스트라이크</span><div class="meta"><span class="duration">5년 플레이</span><span>FPS</span></div></div>
+        </div>
+        <div class="game-card">
+            <div class="thumb"><img src="images/kart.jpg" alt="카트라이더"></div>
+            <div class="info"><span class="title">카트라이더</span><div class="meta"><span class="duration">5년 플레이</span><span>레이싱</span></div></div>
+        </div>
+        <div class="game-card">
+            <div class="thumb"><img src="images/lostark.jpg" alt="로스트아크"></div>
+            <div class="info"><span class="title">로스트아크</span><div class="meta"><span class="duration">3년 플레이</span><span>MMORPG</span></div></div>
+        </div>
+        <div class="game-card">
+            <div class="thumb"><img src="images/warrock.jpg" alt="워록"></div>
+            <div class="info"><span class="title">워록</span><div class="meta"><span class="duration">3년 플레이</span><span>FPS</span></div></div>
+        </div>
+        <div class="game-card">
+            <div class="thumb"><img src="images/magu.jpg" alt="마구마구"></div>
+            <div class="info"><span class="title">마구마구</span><div class="meta"><span class="duration">3년 플레이</span><span>스포츠</span></div></div>
+        </div>
+        <div class="game-card">
+            <div class="thumb"><img src="images/maple2.jpg" alt="메이플스토리2"></div>
+            <div class="info"><span class="title">메이플스토리2</span><div class="meta"><span class="duration">2년 플레이</span><span>RPG / 소셜</span></div></div>
+        </div>
+        <div class="game-card">
+            <div class="thumb"><img src="images/crossfire.jpg" alt="크로스파이어"></div>
+            <div class="info"><span class="title">크로스파이어</span><div class="meta"><span class="duration">1년 플레이</span><span>FPS</span></div></div>
+        </div>
+        <div class="game-card">
+            <div class="thumb"><img src="images/apex.jpg" alt="에이펙스 레전드"></div>
+            <div class="info"><span class="title">에이펙스 레전드</span><div class="meta"><span class="duration">1년 플레이</span><span>FPS</span></div></div>
+        </div>
+        <div class="game-card">
+            <div class="thumb"><img src="images/tekken8.jpg" alt="철권 8"></div>
+            <div class="info"><span class="title">철권 8</span><div class="meta"><span class="duration">1년 플레이</span><span>액션 / 격투</span></div></div>
         </div>
     </div>
 
-    <h2>FPS / TPS</h2>
+    <h2>📱 Mobile Platform</h2>
     <div class="game-grid">
         <div class="game-card">
-            <div class="image-container"><img src="images/overwatch.jpg" alt="오버워치"></div>
-            <div class="info"><span class="platform">PC</span><span class="title">오버워치</span><span class="duration">8년 플레이</span></div>
+            <div class="thumb"><img src="images/com2us.jpg" alt="컴투스프로야구"></div>
+            <div class="info"><span class="title">컴투스프로야구 시리즈</span><div class="meta"><span class="duration">8년 플레이</span><span>스포츠</span></div></div>
         </div>
         <div class="game-card">
-            <div class="image-container"><img src="images/pubg.jpg" alt="배틀그라운드"></div>
-            <div class="info"><span class="platform">PC</span><span class="title">배틀그라운드</span><span class="duration">7년 플레이</span></div>
+            <div class="thumb"><img src="images/tft.jpg" alt="TFT"></div>
+            <div class="info"><span class="title">전략적 팀 전투 (TFT)</span><div class="meta"><span class="duration">5년 플레이</span><span>오토배틀러</span></div></div>
         </div>
         <div class="game-card">
-            <div class="image-container"><img src="images/sudden.jpg" alt="서든어택"></div>
-            <div class="info"><span class="platform">PC</span><span class="title">서든어택</span><span class="duration">5년 플레이</span></div>
+            <div class="thumb"><img src="images/cookierun.jpg" alt="쿠키런"></div>
+            <div class="info"><span class="title">쿠키런</span><div class="meta"><span class="duration">5년 플레이</span><span>캐주얼 / 러닝</span></div></div>
         </div>
         <div class="game-card">
-            <div class="image-container"><img src="images/cs.jpg" alt="카운터 스트라이크"></div>
-            <div class="info"><span class="platform">PC</span><span class="title">카운터 스트라이크</span><span class="duration">5년 플레이</span></div>
+            <div class="thumb"><img src="images/pes-m.jpg" alt="PES"></div>
+            <div class="info"><span class="title">PES (eFootball)</span><div class="meta"><span class="duration">3년 플레이</span><span>스포츠</span></div></div>
         </div>
         <div class="game-card">
-            <div class="image-container"><img src="images/warrock.jpg" alt="워록"></div>
-            <div class="info"><span class="platform">PC</span><span class="title">워록</span><span class="duration">3년 플레이</span></div>
+            <div class="thumb"><img src="images/minigame.jpg" alt="미니게임천국"></div>
+            <div class="info"><span class="title">미니게임천국</span><div class="meta"><span class="duration">3년 플레이</span><span>캐주얼</span></div></div>
         </div>
         <div class="game-card">
-            <div class="image-container"><img src="images/crossfire.jpg" alt="크로스파이어"></div>
-            <div class="info"><span class="platform">PC</span><span class="title">크로스파이어</span><span class="duration">1년 플레이</span></div>
+            <div class="thumb"><img src="images/sachunsung.jpg" alt="프렌즈 사천성"></div>
+            <div class="info"><span class="title">프렌즈 사천성</span><div class="meta"><span class="duration">2년 플레이</span><span>퍼즐</span></div></div>
         </div>
         <div class="game-card">
-            <div class="image-container"><img src="images/apex.jpg" alt="에이펙스 레전드"></div>
-            <div class="info"><span class="platform">PC</span><span class="title">에이펙스 레전드</span><span class="duration">1년 플레이</span></div>
+            <div class="thumb"><img src="images/brainout.jpg" alt="브레인 아웃"></div>
+            <div class="info"><span class="title">브레인 아웃</span><div class="meta"><span class="duration">1년 플레이</span><span>퍼즐</span></div></div>
         </div>
         <div class="game-card">
-            <div class="image-container"><img src="images/arc-raiders.jpg" alt="아크 레이더스"></div>
-            <div class="info"><span class="platform">Console</span><span class="title">아크 레이더스</span><span class="duration">6개월 플레이</span></div>
+            <div class="thumb"><img src="images/mlb-rival.jpg" alt="MLB 라이벌"></div>
+            <div class="info"><span class="title">MLB 라이벌</span><div class="meta"><span class="duration">1년 플레이</span><span>스포츠</span></div></div>
         </div>
         <div class="game-card">
-            <div class="image-container"><img src="images/first-descendant.jpg" alt="퍼스트 디센던트"></div>
-            <div class="info"><span class="platform">Console</span><span class="title">퍼스트 디센던트</span><span class="duration">6개월 플레이</span></div>
+            <div class="thumb"><img src="images/maple-raise.jpg" alt="메이플 키우기"></div>
+            <div class="info"><span class="title">메이플 키우기</span><div class="meta"><span class="duration">6개월 플레이</span><span>방치형 RPG</span></div></div>
+        </div>
+        <div class="game-card">
+            <div class="thumb"><img src="images/nikke.jpg" alt="니케"></div>
+            <div class="info"><span class="title">니케</span><div class="meta"><span class="duration">6개월 플레이</span><span>슈팅 / RPG</span></div></div>
+        </div>
+        <div class="game-card">
+            <div class="thumb"><img src="images/hearthstone.jpg" alt="하스스톤"></div>
+            <div class="info"><span class="title">하스스톤</span><div class="meta"><span class="duration">3개월 플레이</span><span>카드 전략</span></div></div>
         </div>
     </div>
 
-    <h2>RPG & Adventure</h2>
+    <h2>🎮 Console Platform</h2>
     <div class="game-grid">
         <div class="game-card">
-            <div class="image-container"><img src="images/maple.jpg" alt="메이플스토리"></div>
-            <div class="info"><span class="platform">PC</span><span class="title">메이플스토리</span><span class="duration">8년 플레이</span></div>
+            <div class="thumb"><img src="images/fifa.jpg" alt="FIFA"></div>
+            <div class="info"><span class="title">FIFA 시리즈</span><div class="meta"><span class="duration">10년 플레이</span><span>스포츠</span></div></div>
         </div>
         <div class="game-card">
-            <div class="image-container"><img src="images/lostark.jpg" alt="로스트아크"></div>
-            <div class="info"><span class="platform">PC</span><span class="title">로스트아크</span><span class="duration">3년 플레이</span></div>
+            <div class="thumb"><img src="images/fm.jpg" alt="FM"></div>
+            <div class="info"><span class="title">풋볼 매니저 (FM)</span><div class="meta"><span class="duration">8년 플레이</span><span>시뮬레이션</span></div></div>
         </div>
         <div class="game-card">
-            <div class="image-container"><img src="images/maple2.jpg" alt="메이플스토리2"></div>
-            <div class="info"><span class="platform">PC</span><span class="title">메이플스토리2</span><span class="duration">2년 플레이</span></div>
+            <div class="thumb"><img src="images/naruto.jpg" alt="나루토"></div>
+            <div class="info"><span class="title">나루토 질풍전</span><div class="meta"><span class="duration">2년 플레이</span><span>액션 / 격투</span></div></div>
         </div>
         <div class="game-card">
-            <div class="image-container"><img src="images/maple-raise.jpg" alt="메이플 키우기"></div>
-            <div class="info"><span class="platform">Mobile</span><span class="title">메이플 키우기</span><span class="duration">6개월 플레이</span></div>
+            <div class="thumb"><img src="images/mlb-show.jpg" alt="MLB The Show"></div>
+            <div class="info"><span class="title">MLB The Show 시리즈</span><div class="meta"><span class="duration">1년 플레이</span><span>스포츠</span></div></div>
         </div>
         <div class="game-card">
-            <div class="image-container"><img src="images/nikke.jpg" alt="니케"></div>
-            <div class="info"><span class="platform">Mobile</span><span class="title">니케</span><span class="duration">6개월 플레이</span></div>
+            <div class="thumb"><img src="images/ittakestwo.jpg" alt="잇 테이크 투"></div>
+            <div class="info"><span class="title">잇 테이크 투</span><div class="meta"><span class="duration">1년 플레이</span><span>어드벤처 / 협동</span></div></div>
         </div>
         <div class="game-card">
-            <div class="image-container"><img src="images/elden-ring.jpg" alt="엘든 링"></div>
-            <div class="info"><span class="platform">Console</span><span class="title">엘든 링</span><span class="duration">3개월 플레이</span></div>
+            <div class="thumb"><img src="images/onepiece.jpg" alt="원피스"></div>
+            <div class="info"><span class="title">원피스 버닝 블러드</span><div class="meta"><span class="duration">1년 플레이</span><span>액션 / 격투</span></div></div>
         </div>
         <div class="game-card">
-            <div class="image-container"><img src="images/lies-of-p.jpg" alt="P의 거짓"></div>
-            <div class="info"><span class="platform">Console</span><span class="title">P의 거짓</span><span class="duration">3개월 플레이</span></div>
+            <div class="thumb"><img src="images/arc-raiders.jpg" alt="아크 레이더스"></div>
+            <div class="info"><span class="title">아크 레이더스</span><div class="meta"><span class="duration">6개월 플레이</span><span>TPS / 슈팅</span></div></div>
         </div>
         <div class="game-card">
-            <div class="image-container"><img src="images/zelda.jpg" alt="젤다의 전설"></div>
-            <div class="info"><span class="platform">Console</span><span class="title">젤다의 전설</span><span class="duration">3개월 플레이</span></div>
+            <div class="thumb"><img src="images/first-descendant.jpg" alt="퍼스트 디센던트"></div>
+            <div class="info"><span class="title">퍼스트 디센던트</span><div class="meta"><span class="duration">6개월 플레이</span><span>루트 슈터</span></div></div>
+        </div>
+        <div class="game-card">
+            <div class="thumb"><img src="images/elden-ring.jpg" alt="엘든 링"></div>
+            <div class="info"><span class="title">엘든 링</span><div class="meta"><span class="duration">3개월 플레이</span><span>액션 RPG</span></div></div>
+        </div>
+        <div class="game-card">
+            <div class="thumb"><img src="images/lies-of-p.jpg" alt="P의 거짓"></div>
+            <div class="info"><span class="title">P의 거짓</span><div class="meta"><span class="duration">3개월 플레이</span><span>액션 RPG</span></div></div>
+        </div>
+        <div class="game-card">
+            <div class="thumb"><img src="images/zelda.jpg" alt="젤다의 전설"></div>
+            <div class="info"><span class="title">젤다의 전설</span><div class="meta"><span class="duration">3개월 플레이</span><span>어드벤처</span></div></div>
         </div>
     </div>
-
-    <h2>Strategy & MOBA</h2>
-    <div class="game-grid">
-        <div class="game-card">
-            <div class="image-container"><img src="images/starcraft.jpg" alt="스타크래프트"></div>
-            <div class="info"><span class="platform">PC</span><span class="title">스타크래프트</span><span class="duration">12년 플레이</span></div>
-        </div>
-        <div class="game-card">
-            <div class="image-container"><img src="images/lol.jpg" alt="LoL"></div>
-            <div class="info"><span class="platform">PC</span><span class="title">리그 오브 레전드</span><span class="duration">10년 플레이</span></div>
-        </div>
-        <div class="game-card">
-            <div class="image-container"><img src="images/tft.jpg" alt="TFT"></div>
-            <div class="info"><span class="platform">Mobile</span><span class="title">전략적 팀 전투 (TFT)</span><span class="duration">5년 플레이</span></div>
-        </div>
-        <div class="game-card">
-            <div class="image-container"><img src="images/hearthstone.jpg" alt="하스스톤"></div>
-            <div class="info"><span class="platform">Mobile</span><span class="title">하스스톤</span><span class="duration">3개월 플레이</span></div>
-        </div>
-    </div>
-
-    <h2>Action & Fighting</h2>
-    <div class="game-grid">
-        <div class="game-card">
-            <div class="image-container"><img src="images/naruto.jpg" alt="나루토"></div>
-            <div class="info"><span class="platform">Console</span><span class="title">나루토 질풍전</span><span class="duration">2년 플레이</span></div>
-        </div>
-        <div class="game-card">
-            <div class="image-container"><img src="images/tekken8.jpg" alt="철권 8"></div>
-            <div class="info"><span class="platform">PC</span><span class="title">철권 8</span><span class="duration">1년 플레이</span></div>
-        </div>
-        <div class="game-card">
-            <div class="image-container"><img src="images/onepiece.jpg" alt="원피스"></div>
-            <div class="info"><span class="platform">Console</span><span class="title">원피스 버닝 블러드</span><span class="duration">1년 플레이</span></div>
-        </div>
-        <div class="game-card">
-            <div class="image-container"><img src="images/ittakestwo.jpg" alt="잇 테이크 투"></div>
-            <div class="info"><span class="platform">Console</span><span class="title">잇 테이크 투</span><span class="duration">1년 플레이</span></div>
-        </div>
-    </div>
-
-    <h2>Casual / Puzzle / Racing</h2>
-    <div class="game-grid">
-        <div class="game-card">
-            <div class="image-container"><img src="images/cookierun.jpg" alt="쿠키런"></div>
-            <div class="info"><span class="platform">Mobile</span><span class="title">쿠키런</span><span class="duration">5년 플레이</span></div>
-        </div>
-        <div class="game-card">
-            <div class="image-container"><img src="images/kart.jpg" alt="카트라이더"></div>
-            <div class="info"><span class="platform">PC</span><span class="title">카트라이더</span><span class="duration">5년 플레이</span></div>
-        </div>
-        <div class="game-card">
-            <div class="image-container"><img src="images/minigame.jpg" alt="미니게임천국"></div>
-            <div class="info"><span class="platform">Mobile</span><span class="title">미니게임천국</span><span class="duration">3년 플레이</span></div>
-        </div>
-        <div class="game-card">
-            <div class="image-container"><img src="images/sachunsung.jpg" alt="프렌즈 사천성"></div>
-            <div class="info"><span class="platform">Mobile</span><span class="title">프렌즈 사천성</span><span class="duration">2년 플레이</span></div>
-        </div>
-        <div class="game-card">
-            <div class="image-container"><img src="images/brainout.jpg" alt="브레인 아웃"></div>
-            <div class="info"><span class="platform">Mobile</span><span class="title">브레인 아웃</span><span class="duration">1년 플레이</span></div>
-        </div>
-    </div>
+</div>
 
 </body>
 </html>
