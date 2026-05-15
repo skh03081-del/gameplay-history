@@ -4,74 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LEE JAE YOUNG // GAME PLAY LIST</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@400;600;700;800&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* 포트폴리오 다크 모드 표준 스타일 */
         :root {
-            --bg-deep: #0a0c10;
-            --card-bg: #1c2128;
-            --text-main: #e6edf3;
+            --bg-dark: #0d1117;
+            --card-bg: #161b22;
+            --text-main: #f0f6fc;
             --text-sub: #8b949e;
-            --accent-cyan: #58a6ff;  /* 전문적인 시안색 */
+            --pc-color: #58a6ff;     /* PC: 시안 블루 */
+            --mobile-color: #3fb950;  /* Mobile: 그린 */
+            --console-color: #bc8cff; /* Console: 퍼플 */
             --border-color: #30363d;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: var(--bg-deep);
+            font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-dark);
             color: var(--text-main);
-            line-height: 1.6;
             padding: 80px 20px;
-            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        .container { max-width: 1300px; margin: 0 auto; }
+        .container { max-width: 1400px; margin: 0 auto; }
 
-        /* 헤더 디자인 (요청하신 대로 단순화) */
+        /* [Header] 요청대로 수정된 상단 디자인 */
         header {
             text-align: center;
             margin-bottom: 100px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid var(--border-color);
+        }
+        header .name-tag {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: 10px;
+            margin-bottom: 10px;
+            display: block;
         }
         header h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: -1px;
-            margin-bottom: 10px;
-        }
-        header .name-tag {
-            font-size: 1.2rem;
-            color: var(--text-sub);
-            letter-spacing: 5px;
-            font-weight: 400;
+            font-size: 4.5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            background: linear-gradient(180deg, #fff 40%, var(--pc-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
         }
 
-        /* 플랫폼 섹션 제목 (PLATFORM 등 제거) */
-        .section-label {
+        /* [Section Header] 가독성 강조 및 효과 */
+        .section-header {
+            margin: 120px 0 40px;
+            padding: 12px 25px;
+            border-radius: 8px;
+            display: inline-block;
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            color: var(--accent-cyan);
-            margin: 80px 0 30px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
+            position: relative;
+            min-width: 200px;
         }
-        .section-label::after {
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
+        }
+        .section-header::before {
             content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(90deg, var(--border-color), transparent);
+            position: absolute;
+            left: 0; bottom: -5px;
+            width: 100%; height: 4px;
+            border-radius: 2px;
+            box-shadow: 0 0 15px currentColor;
         }
+
+        .pc-header { color: var(--pc-color); background: rgba(88, 166, 255, 0.1); }
+        .mobile-header { color: var(--mobile-color); background: rgba(63, 185, 80, 0.1); }
+        .console-header { color: var(--console-color); background: rgba(188, 140, 255, 0.1); }
 
         /* 그리드 */
         .grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
+            gap: 30px;
         }
 
         /* 카드 디자인 */
@@ -80,52 +98,54 @@
             border: 1px solid var(--border-color);
             border-radius: 12px;
             overflow: hidden;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
         }
         .card:hover {
             transform: translateY(-8px);
-            border-color: var(--accent-cyan);
+            border-color: currentColor;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* [핵심] 사진 안 짤리고 전체 노출되게 디자인 수정 */
+        /* [Image Box] 짤림 방지 + 배경 블러 자연스럽게 채우기 */
         .img-box {
             position: relative;
             width: 100%;
-            aspect-ratio: 4 / 3; /* 카드 비율 고정 */
-            background: #000; /* 빈 공간 배경색 */
-            overflow: hidden;
+            aspect-ratio: 4 / 3; /* 모든 카드 높이 통일 */
+            background: #000;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
-
-        /* 메인 이미지 (전체 노출) */
+        .img-blur-bg {
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            object-fit: cover;
+            filter: blur(15px) brightness(0.3);
+            z-index: 1;
+        }
         .img-main {
             position: relative;
             z-index: 2;
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain; /* [중요] 절대 잘리지 않고 전체 다 보여줌 (개발 표준) */
-            transition: transform 0.3s ease;
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* [중요] 이미지가 잘리지 않고 전체 노출됨 */
+            padding: 5px;
         }
-        .card:hover .img-main { transform: scale(1.05); }
 
         /* 정보 영역 */
         .info-box {
-            padding: 20px;
+            padding: 22px;
             flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
         }
         .info-box h3 {
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            color: #fff;
             margin-bottom: 15px;
+            color: #fff;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -137,72 +157,81 @@
             align-items: center;
         }
 
-        /* 플레이 기간 대괄호 표시 */
-        .time {
+        /* 숫자 가독성 최적화 폰트 적용 (Poppins) */
+        .time-badge {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 800;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 4px 12px;
+            border-radius: 6px;
+            color: #fff;
+        }
+        .genre-tag {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
-            color: var(--text-sub);
-        }
-
-        /* 장르 데이터 노출 */
-        .genre {
             font-size: 0.85rem;
-            color: var(--accent-cyan);
             font-weight: 700;
+            color: currentColor;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        @media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; header h1 { font-size: 2.2rem; } } }
+        @media (max-width: 1200px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { 
+            .grid { grid-template-columns: 1fr; } 
+            header h1 { font-size: 2.8rem; }
+            .section-header h2 { font-size: 1.8rem; }
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>LEE JAE YOUNG // GAME PLAY LIST</h1>
-        <p class="name-tag">DEVELOPER & PLANNER ARCHIVE</p>
+        <span class="name-tag">LEE JAE YOUNG</span>
+        <h1>GAME PLAY LIST</h1>
     </header>
 
-    <div class="section-label">01. PC</div>
+    <div class="section-header pc-header">
+        <h2>01. PC</h2>
+    </div>
     <div id="pc-grid" class="grid"></div>
 
-    <div class="section-label">02. MOBILE</div>
+    <div class="section-header mobile-header">
+        <h2>02. MOBILE</h2>
+    </div>
     <div id="mobile-grid" class="grid"></div>
 
-    <div class="section-label">03. CONSOLE</div>
+    <div class="section-header console-header">
+        <h2>03. CONSOLE</h2>
+    </div>
     <div id="console-grid" class="grid"></div>
 </div>
 
 <script>
     const parseTime = (t) => t.includes('년') ? parseInt(t) * 12 : parseInt(t);
 
-    const render = (id, data) => {
+    const render = (id, data, color) => {
         const grid = document.getElementById(id);
-        if (!grid) return;
-
-        // 플레이 시간 많은 순서 정렬
         const sorted = [...data].sort((a, b) => parseTime(b.time) - parseTime(a.time));
         
         sorted.forEach(g => {
             grid.innerHTML += `
-                <div class="card">
+                <div class="card" style="color: ${color}">
                     <div class="img-box">
-                        <img src="${g.img}.jpg" alt="${g.name}" class="img-main" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300/111/333?text=IMAGE+MISSING';">
+                        <img src="${g.img}.jpg" class="img-blur-bg">
+                        <img src="${g.img}.jpg" class="img-main" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300/111/444?text=IMAGE+MISSING';">
                     </div>
                     <div class="info-box">
                         <h3>${g.name}</h3>
                         <div class="stats">
-                            <span class="time">[ ${g.time} ]</span>
-                            <span class="genre">${g.genre}</span>
+                            <span class="time-badge">${g.time}</span>
+                            <span class="genre-tag">${g.genre}</span>
                         </div>
                     </div>
                 </div>`;
         });
     };
 
-    // [핵심] 'img' 값은 깃허브 최상위에 올린 파일명과 '반드시 대소문자까지' 똑같아야 합니다.
     const pcGames = [
         {name: "FC 온라인", time: "15년", img: "fc-online", genre: "Sports"},
         {name: "스타크래프트", time: "12년", img: "starcraft", genre: "RTS"},
@@ -261,9 +290,9 @@
     ];
 
     document.addEventListener('DOMContentLoaded', () => {
-        render('pc-grid', pcGames);
-        render('mobile-grid', mobileGames);
-        render('console-grid', consoleGames);
+        render('pc-grid', pcGames, "var(--pc-color)");
+        render('mobile-grid', mobileGames, "var(--mobile-color)");
+        render('console-grid', consoleGames, "var(--console-color)");
     });
 </script>
 </body>
